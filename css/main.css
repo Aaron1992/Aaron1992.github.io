@@ -1061,7 +1061,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c7ff45;
+  background: #50ffd2;
 }
 .sidebar-nav {
   margin: 0;
@@ -2197,4 +2197,11 @@ ul li {
   max-width: 100%;
   width: auto;
   margin: 0;
+}
+.site-author-image {
+  border-radius: 50%;
+  webkit-transition: 1.4s all;
+  -moz-transition: 1.4s all;
+  -ms-transition: 1.4s all;
+  transition: 1.4s all;
 }
