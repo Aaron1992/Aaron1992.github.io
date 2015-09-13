@@ -41,13 +41,13 @@
 
 <meta name="description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hashcat破解office密码">
+<meta property="og:title" content="hashcat破解office(97-03,2007,2010,2013)密码">
 <meta property="og:url" content="http://ibat.me/2015/09/13/hashcat破解office密码/index.html">
 <meta property="og:site_name" content="ICode Bat">
 <meta property="og:description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
-<meta property="og:updated_time" content="2015-09-13T16:51:37.320Z">
+<meta property="og:updated_time" content="2015-09-13T16:56:45.758Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hashcat破解office密码">
+<meta name="twitter:title" content="hashcat破解office(97-03,2007,2010,2013)密码">
 <meta name="twitter:description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
 
 
@@ -58,7 +58,7 @@
   };
 </script>
 
-  <title> hashcat破解office密码 | ICode Bat </title>
+  <title> hashcat破解office(97-03,2007,2010,2013)密码 | ICode Bat </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -173,7 +173,7 @@
           
           
             
-              hashcat破解office密码
+              hashcat破解office(97-03,2007,2010,2013)密码
             
           
         </h1>
@@ -224,7 +224,7 @@
 
       
         <span itemprop="articleBody"><h3 id="hashcat_是什么">hashcat 是什么</h3><p>hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支持的加密算法见<a href="http://hashcat.net/oclhashcat/。" target="_blank" rel="external">http://hashcat.net/oclhashcat/。</a></p>
-<p>使用hashcat破解office密码的时候需要指定加密方式，Office 03 - 2013一共有6中hash方式，分别如下</p>
+<p>使用hashcat破解office密码的时候需要指定加密方式，Office 03 - 2013一共有9种hash方式，分别如下</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(MD5+RC4,oldoffice$<span class="number">0</span>,oldoffice$<span class="number">1</span>): flag -m <span class="number">9700</span></span><br><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(MD5+RC4,collider-mode<span class="preprocessor">#<span class="number">1</span>): flag -m <span class="number">9710</span></span></span><br><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(MD5+RC4,collider-mode<span class="preprocessor">#<span class="number">2</span>): flag -m <span class="number">9720</span></span></span><br><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(SHA1+RC4,oldoffice$<span class="number">3</span>,oldoffice$<span class="number">4</span>): flag -m <span class="number">9800</span></span><br><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(SHA1+RC4,collider-mode<span class="preprocessor">#<span class="number">1</span>): flag -m <span class="number">9810</span></span></span><br><span class="line">Office <span class="number">97</span>-<span class="number">03</span>(SHA1+RC4,collider-mode<span class="preprocessor">#<span class="number">2</span>): flag -m <span class="number">9820</span></span></span><br><span class="line">Office <span class="number">2007</span>: flag -m <span class="number">9400</span></span><br><span class="line">Office <span class="number">2010</span>: flag -m <span class="number">9500</span></span><br><span class="line">Office <span class="number">2013</span>: flag -m <span class="number">9600</span></span><br></pre></td></tr></table></figure>
 <p>本文将介绍如何使用hashcat破解office密码。现在我有一个密码加密的xls文件test.xls，我将在windows平台使用hashcat破解它的密码。</p>
 <h3 id="获取文件hash值">获取文件hash值</h3><p>首先，我们需要获取文件的hash值，使用<a href="https://github.com/kholia/RC4-40-brute-office/blob/master/office2john.py" target="_blank" rel="external">office2john.py</a>可以提取文件的hash值。<br>运行这个脚本首先需要安装python2.7环境。</p>
@@ -446,7 +446,7 @@
     <script type="text/javascript">
       var disqus_shortname = 'ibat';
       var disqus_identifier = '2015/09/13/hashcat破解office密码/';
-      var disqus_title = 'hashcat破解office密码';
+      var disqus_title = 'hashcat破解office(97-03,2007,2010,2013)密码';
       var disqus_url = 'http://ibat.me/2015/09/13/hashcat破解office密码/';
 
       function run_disqus_script(disqus_script){
