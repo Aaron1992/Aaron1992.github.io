@@ -30,10 +30,6 @@
 
 
 
-  <meta name="keywords" content="
-- vps
-- digitalocean," />
-
 
 
 
@@ -41,19 +37,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
+<meta name="description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
+将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电信服务商屏蔽digitalocean新加坡ip">
-<meta property="og:url" content="http://ibat.me/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/index.html">
+<meta property="og:title" content="Meteor使用现有的mongodb数据库">
+<meta property="og:url" content="http://ibat.me/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/index.html">
 <meta property="og:site_name" content="ICode Bat">
-<meta property="og:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
-<meta property="og:updated_time" content="2014-11-28T14:22:17.000Z">
+<meta property="og:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
+将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
+<meta property="og:updated_time" content="2015-05-01T03:29:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="电信服务商屏蔽digitalocean新加坡ip">
-<meta name="twitter:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
+<meta name="twitter:title" content="Meteor使用现有的mongodb数据库">
+<meta name="twitter:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
+将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -63,7 +59,7 @@
   };
 </script>
 
-  <title> 电信服务商屏蔽digitalocean新加坡ip | ICode Bat </title>
+  <title> Meteor使用现有的mongodb数据库 | ICode Bat </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -178,7 +174,7 @@
           
           
             
-              电信服务商屏蔽digitalocean新加坡ip
+              Meteor使用现有的mongodb数据库
             
           
         </h1>
@@ -187,8 +183,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-11-28T22:17:05+08:00" content="2014-11-28">
-            2014-11-28
+          <time itemprop="dateCreated" datetime="2015-05-01T11:26:30+08:00" content="2015-05-01">
+            2015-05-01
           </time>
         </span>
 
@@ -198,8 +194,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/#comments" itemprop="discussionUrl">
-              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/" itemprop="commentsCount"></span>
+            <a href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="commentsCount"></span>
             </a>
           </span>
           
@@ -213,35 +209,26 @@
       
 
       
-        <span itemprop="articleBody"><p>　　因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。</p>
-<p>　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方ping都不会产生如此高的丢包。</p>
-<p>　　室友说是GFW的问题。我觉得很认同。</p>
-<p>　　晚上的时候，我突然想到换个网络通出口，我平时一直用的是电信出口。我将网络通出口换成了移动出口，这一次，ssh连接成功了。延迟很低。就像在本地一样。但是如果用移动出口，访问国内网站又会效果不好。我这一次换成了教育网出口。显而易见，也是非常的通畅。把shadowsocks本地的配置更改了一下，浏览器代理加了规则list:<a href="http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。" target="_blank" rel="external">http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。</a> 今天完工。</p>
-<p>　　该死的电信防火墙。</p>
+        <span itemprop="articleBody"><p>meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> MONGO_URL=mongodb:<span class="comment">//localhost:27017/your_db</span></span><br></pre></td></tr></table></figure></p>
+<p>将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。</p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/vps-digitalocean/" rel="tag">#
-- vps
-- digitalocean</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" rel="prev">使用Las Vegas随机算法求N皇后问题的解</a>
+              <a href="/2015/06/15/shang-hai-hua-wei-zhi-xing/" rel="prev">2015华为软件编程大赛上海复赛之行</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" rel="next">字母转换大小写</a>
             
           </div>
         </div>
@@ -413,9 +400,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'ibat';
-      var disqus_identifier = '2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/';
-      var disqus_title = '电信服务商屏蔽digitalocean新加坡ip';
-      var disqus_url = 'http://ibat.me/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/';
+      var disqus_identifier = '2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/';
+      var disqus_title = 'Meteor使用现有的mongodb数据库';
+      var disqus_url = 'http://ibat.me/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
