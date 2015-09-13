@@ -42,41 +42,38 @@
 
 <meta name="description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
 
-###复制和粘贴
-剪切（复制）和粘贴  
+复制和粘贴剪切（复制）和粘贴  
 
 将光标移动到剪切的开头部分
 按v开始选择字符（按住V选择整行）
 将光标移动到希望剪切部分的尾部。
 按d剪切（按y复制）
-移动到希望粘">
+移动到希望粘贴的地方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vim 学习笔记-复制和粘贴">
 <meta property="og:url" content="http://ibat.me/2014/12/08/vim-xue-xi-bi-ji-1/index.html">
 <meta property="og:site_name" content="ICode Bat">
 <meta property="og:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
 
-###复制和粘贴
-剪切（复制）和粘贴  
+复制和粘贴剪切（复制）和粘贴  
 
 将光标移动到剪切的开头部分
 按v开始选择字符（按住V选择整行）
 将光标移动到希望剪切部分的尾部。
 按d剪切（按y复制）
-移动到希望粘">
+移动到希望粘贴的地方">
 <meta property="og:updated_time" content="2014-12-17T16:32:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim 学习笔记-复制和粘贴">
 <meta name="twitter:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
 
-###复制和粘贴
-剪切（复制）和粘贴  
+复制和粘贴剪切（复制）和粘贴  
 
 将光标移动到剪切的开头部分
 按v开始选择字符（按住V选择整行）
 将光标移动到希望剪切部分的尾部。
 按d剪切（按y复制）
-移动到希望粘">
+移动到希望粘贴的地方">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -238,8 +235,7 @@
       
         <span itemprop="articleBody"><p>最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。</p>
 <hr>
-<p>###复制和粘贴</p>
-<p><strong>剪切（复制）和粘贴</strong>  </p>
+<h3 id="复制和粘贴">复制和粘贴</h3><p><strong>剪切（复制）和粘贴</strong>  </p>
 <ol>
 <li>将光标移动到剪切的开头部分</li>
 <li>按<strong>v</strong>开始选择字符（按住<strong>V</strong>选择整行）</li>
@@ -251,11 +247,10 @@
 <blockquote>
 <p><em>tips:</em><br> <strong>d</strong> = delete = cut<br> <strong>y</strong> = yank = copy</p>
 <hr>
-<p>###多段粘贴</p>
-</blockquote>
+<h3 id="多段粘贴">多段粘贴</h3></blockquote>
 <p>当删除或者复制一段文字的时候，这段文字被保存在Vim的未命名寄存器中。Vim中还可以使用用单个字母标记的命名寄存器。用一个双引号加一个字母指定要使用的寄存器。  </p>
 <p>例如，选择==hello==后，按==”ay==将”hello”保存到==a==寄存器，然后选择==world==,按==”by==保存到==b==寄存器。当要粘贴的时候，分别使用==”ap==和==”bp==粘贴”hello”和”world”。当然也可以使用==”aP==和==”bP==来粘贴到光标之前。</p>
-<p>####在不同Vim窗口（或终端）中粘贴<br>在复制文本后，为了复制到另一个文件，先打开一个缓冲区：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:e</span> ~<span class="regexp">/dummy</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="在不同Vim窗口（或终端）中粘贴">在不同Vim窗口（或终端）中粘贴</h4><p>在复制文本后，为了复制到另一个文件，先打开一个缓冲区：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:e</span> ~<span class="regexp">/dummy</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>将文本粘贴到缓冲区</li>
 <li>保存缓冲区的内容(:w)</li>
@@ -265,8 +260,7 @@
 <li>读取dummy文件(:r ~/dummy)  </li>
 </ul>
 <hr>
-<p>###增加缓冲区大小</p>
-<p>在Vim中有时候最多只能复制50行。可以通过增加缓存区大小来解除这个限制：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:<span class="operator"><span class="keyword">help</span> <span class="string">'viminfo'</span></span><br><span class="line">...</span><br><span class="line">&lt;       Maximum <span class="built_in">number</span> <span class="keyword">of</span> <span class="keyword">lines</span> saved <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">register</span>.</span><br><span class="line">...</span><br><span class="line">:<span class="keyword">set</span> viminfo?</span><br><span class="line">:<span class="keyword">set</span> viminfo=<span class="string">'100,&lt;100,s10,h</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="增加缓冲区大小">增加缓冲区大小</h3><p>在Vim中有时候最多只能复制50行。可以通过增加缓存区大小来解除这个限制：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:<span class="operator"><span class="keyword">help</span> <span class="string">'viminfo'</span></span><br><span class="line">...</span><br><span class="line">&lt;       Maximum <span class="built_in">number</span> <span class="keyword">of</span> <span class="keyword">lines</span> saved <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">register</span>.</span><br><span class="line">...</span><br><span class="line">:<span class="keyword">set</span> viminfo?</span><br><span class="line">:<span class="keyword">set</span> viminfo=<span class="string">'100,&lt;100,s10,h</span></span></span><br></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -384,23 +378,11 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/iissnan" target="_blank">GitHub</a>
+                <a href="https://github.com/aaron1992" target="_blank">GitHub</a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/iissnan" target="_blank">Twitter</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/iissnan" target="_blank">Weibo</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://douban.com/people/iissnan" target="_blank">DouBan</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/iissnan" target="_blank">ZhiHu</a>
+                <a href="http://weibo.com/u/1869777785" target="_blank">Weibo</a>
               </span>
             
           
@@ -421,7 +403,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#复制和粘贴"><span class="nav-number">1.</span> <span class="nav-text">复制和粘贴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多段粘贴"><span class="nav-number">2.</span> <span class="nav-text">多段粘贴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在不同Vim窗口（或终端）中粘贴"><span class="nav-number">2.1.</span> <span class="nav-text">在不同Vim窗口（或终端）中粘贴</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加缓冲区大小"><span class="nav-number">3.</span> <span class="nav-text">增加缓冲区大小</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

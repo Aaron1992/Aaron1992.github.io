@@ -236,12 +236,10 @@
 <li><strong>异步非阻塞</strong>：仍然是那个会“叮”一声的下载软件，小明提交下载任务后就去干别的，听到“叮”的一声就知道完成了。<br>也就是说，同步/异步是下载软件的通知方式，或者说 API 被调用者的通知方式。阻塞/非阻塞则是小明的等待方式，或者说 API 调用者的等待方式。</li>
 </ol>
 <p>在不同的场景下，同步/异步、阻塞/非阻塞的四种组合都有应用。</p>
-<p>###同步阻塞</p>
-<p>同步阻塞是最简单的方式，就像我们在 C 语言里调用一个函数并等待其返回。</p>
+<h3 id="同步阻塞">同步阻塞</h3><p>同步阻塞是最简单的方式，就像我们在 C 语言里调用一个函数并等待其返回。</p>
 <p><img src="https://bojieli.com/wp-content/uploads/2014/11/99880254f7298bc9d8f9e57a4033584a.png" alt=""></p>
 <p>如 stat 系统调用获取文件元数据，只有同步阻塞一种模式。我在访问量很大的一个文件服务器（mirrors.ustc.edu.cn）上遇到过大量 nginx 进程处于 D（uninterruptible）状态的问题，就是因为 stat 系统调用不提供非阻塞 I/O（O_NONBLOCK）选项（nginx 在能用非阻塞 I/O 的地方都用了非阻塞）。文件的元数据被从磁盘中读入进来的时间里，这个 nginx worker 进程只能在内核态苦苦等待而无法做其他事。不提供 O_NONBLOCK 选项，对内核开发者来说这是省事了，但对用户来说就要付出性能的代价了。</p>
-<p>###同步非阻塞</p>
-<p>同步非阻塞就是 “每隔一会儿瞄一眼进度条” 的轮询（polling）方式。</p>
+<h3 id="同步非阻塞">同步非阻塞</h3><p>同步非阻塞就是 “每隔一会儿瞄一眼进度条” 的轮询（polling）方式。</p>
 <p>![] (<a href="https://bojieli.com/wp-content/uploads/2014/11/99880254f7298bc9d8f9e57a4033584a.png" target="_blank" rel="external">https://bojieli.com/wp-content/uploads/2014/11/99880254f7298bc9d8f9e57a4033584a.png</a>)</p>
 <p>同步非阻塞方式相比同步阻塞方式：</p>
 <ul>
@@ -253,8 +251,7 @@
 <center>Linux I/O 多路复用</center>
 
 <p>高并发的程序一般使用同步非阻塞方式而非多线程 + 同步阻塞方式。要理解这一点，首先要扯到并发和并行的区别。比如去某部门办事需要依次去几个窗口，办事大厅里的人数就是并发数，而窗口个数就是并行度。也就是说并发数是指同时进行的任务数（如同时服务的 HTTP 请求），而并行数是可以同时工作的物理资源数量（如 CPU 核数）。通过合理调度任务的不同阶段，并发数可以远远大于并行度，这就是区区几个 CPU 可以支持上万个用户并发请求的奥秘。在这种高并发的情况下，为每个任务（用户请求）创建一个进程或线程的开销非常大。而同步非阻塞方式可以把多个 I/O 请求丢到后台去，这就可以在一个进程里服务大量的并发 I/O 请求。</p>
-<p>###异步非阻塞</p>
-<p>异步非阻塞，就是把一件事丢到 “后台” 去做，完成之后再通知。</p>
+<h3 id="异步非阻塞">异步非阻塞</h3><p>异步非阻塞，就是把一件事丢到 “后台” 去做，完成之后再通知。</p>
 <p><img src="https://bojieli.com/wp-content/uploads/2014/11/0909b4a6480a374239b4b76d1e6706ab.png" alt=""></p>
 <p>在 Linux 中，通知的方式是 “信号”。</p>
 <ul>
@@ -267,8 +264,7 @@
 <center>Windows 异步 I/O 原理</center>
 
 <p>很多人把 Linux 的 O_NONBLOCK 认为是异步方式，但事实上这是前面讲的同步非阻塞方式。由于 Linux 的异步 I/O 难用，nginx 早期版本一直使用的是 O_NONBLOCK 和 epoll，从 0.8.11 开始支持异步 I/O，但默认使用的仍然是同步非阻塞方式。需要指出的是，虽然 Linux 上的 I/O API 略显粗糙，但每种编程框架都有封装好的异步 I/O 实现。操作系统少做事，把更多的自由留给用户，正是 UNIX 的设计哲学，也是 Linux 上编程框架百花齐放的一个原因。</p>
-<p>###异步阻塞</p>
-<p>都有下载完成通知了，我还傻傻地盯着进度条干什么？这种看起来很傻的方式也是有用的。有时我们的 API 只提供异步通知方式，例如在 node.js 里，但业务逻辑需要的是做完一件事后做另一件事，例如数据库连接初始化后才能开始接受用户的 HTTP 请求。这样的业务逻辑就需要调用者是以阻塞方式来工作。</p>
+<h3 id="异步阻塞">异步阻塞</h3><p>都有下载完成通知了，我还傻傻地盯着进度条干什么？这种看起来很傻的方式也是有用的。有时我们的 API 只提供异步通知方式，例如在 node.js 里，但业务逻辑需要的是做完一件事后做另一件事，例如数据库连接初始化后才能开始接受用户的 HTTP 请求。这样的业务逻辑就需要调用者是以阻塞方式来工作。</p>
 <p>为了在异步环境里模拟 “顺序执行” 的效果，就需要把同步代码转换成异步形式，这称为 CPS（Continuation Passing Style）变换。BYVoid 大神的 continuation.js 库就是一个 CPS 变换的工具。用户只需用比较符合人类常理的同步方式书写代码，CPS 变换器会把它转换成层层嵌套的异步回调形式。</p>
 <p><img src="https://bojieli.com/wp-content/uploads/2014/11/5c285ecb4fb48eb685a71e0303828e18.png" alt=""></p>
 <center>CPS 变换后的异步代码示例（来源：continuation.js）</center>
@@ -391,23 +387,11 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/iissnan" target="_blank">GitHub</a>
+                <a href="https://github.com/aaron1992" target="_blank">GitHub</a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/iissnan" target="_blank">Twitter</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/iissnan" target="_blank">Weibo</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://douban.com/people/iissnan" target="_blank">DouBan</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.zhihu.com/people/iissnan" target="_blank">ZhiHu</a>
+                <a href="http://weibo.com/u/1869777785" target="_blank">Weibo</a>
               </span>
             
           
@@ -428,7 +412,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步阻塞"><span class="nav-number">1.</span> <span class="nav-text">同步阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步非阻塞"><span class="nav-number">2.</span> <span class="nav-text">同步非阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步非阻塞"><span class="nav-number">3.</span> <span class="nav-text">异步非阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步阻塞"><span class="nav-number">4.</span> <span class="nav-text">异步阻塞</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
