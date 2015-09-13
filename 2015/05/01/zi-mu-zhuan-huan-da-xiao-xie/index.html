@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字母转换大小写 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="在ASCII码中，大写字母A-Z的编码是41h-5Ah,小写字母a-z的编码是61h-8Ah,中间相差20h，用二进制表示就是0010 0000。所以当从大写转换成小写或者从小写转换到大写的时候只需改变一位即可。可以用位操作很快的实现。
+c语言示例代码1234567891011121314//小写转">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">字母转换大小写</h1>
+  
+
+    <time datetime="2015-05-01T16:04:20.000Z">
+  <span class="day">1</span><span class="month">May</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>在ASCII码中，大写字母A-Z的编码是41h-5Ah,小写字母a-z的编码是61h-8Ah,中间相差20h，用二进制表示就是0010 0000。所以当从大写转换成小写或者从小写转换到大写的时候只需改变一位即可。可以用位操作很快的实现。</p>
+<p>c语言示例代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小写转换成大写</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">upper</span><span class="params">(<span class="keyword">char</span> input)</span></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> input &amp; <span class="number">0xdf</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//大写转换成小写</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">lower</span><span class="params">(<span class="keyword">char</span> input)</span></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> input | <span class="number">0x20</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//大小写转换,大写变小写，小写变大写。</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span> input)</span></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> input ^ <span class="number">0x20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

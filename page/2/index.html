@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 2 頁 | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/">ubuntu 安装ssh-server并且允许root登陆</a></h1>
+  
+
+    <time datetime="2014-11-29T07:05:57.000Z">
+  <span class="day">28</span><span class="month">Nov</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <ol>
+<li><strong>安装ssh-server:</strong><br> <code>sudo apt-get install ssh-server</code></li>
+<li><strong>允许root账号通过ssh连接</strong><br> 编辑<code>/etc/ssh/sshd_config</code>文件，找到<code>PermitRootLogin without-password</code><br> 并在下边添加<br> <code>PermitRootLogin yes</code><br> 然后<br> <code>service ssh restart</code>或<code>service ssh reload</code></li>
+</ol>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/">使用Las Vegas随机算法求N皇后问题的解</a></h1>
+  
+
+    <time datetime="2014-11-29T06:23:07.000Z">
+  <span class="day">28</span><span class="month">Nov</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;time.h&gt;</span></span>
+
+<span class="preprocessor">#<span class="keyword">define</span> bool int</span>
+<span class="preprocessor">#<span class="keyword">define</span> true <span class="number">1</span></span>
+<span class="preprocessor">#<span class="keyword">define</span> false <span class="number">0</span></span>
+
+<span class="preprocessor">#<span class="keyword">define</span> DIM <span class="number">50</span> </span>
+
+<span class="function"><span class="keyword">int</span> <span class="title">uniform</span><span class="params">(<span class="keyword">int</span> n)</span></span>{   <span class="comment">//random function</span>
+    <span class="keyword">double</span> r;
+    <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)
+    <span class="keyword">return</span> -<span class="number">1</span>;
+    r=rand();
+    <span class="keyword">return</span> (<span class="keyword">int</span>)(r/RAND_MAX*(n-<span class="number">1</span>))+<span class="number">1</span>;
+}
+
+<span class="function"><span class="keyword">bool</span> <span class="title">QueensLv</span><span class="params">(<span class="keyword">int</span> <span class="keyword">try</span>[])</span></span>{   <span class="comment">//LV算法解决N皇后问题</span>
+    <span class="keyword">int</span> index,nb;
+    <span class="keyword">int</span> col,randcol;
+    <span class="keyword">bool</span> conflict=<span class="literal">false</span>;
+    <span class="keyword">int</span> row=<span class="number">0</span>;
+    <span class="keyword">bool</span> success=<span class="literal">false</span>;
+
+    <span class="keyword">do</span> {   <span class="comment">//从第一行开始</span>
+        nb=<span class="number">0</span>;    <span class="comment">////计数器，nb值为（row)th皇后的open位置总数</span>
+        <span class="keyword">for</span>(col=<span class="number">0</span>;col&lt;DIM;col++){   <span class="comment">//从第一列开始</span>
+            conflict = <span class="literal">false</span>;
+            <span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;row;index++){
+                <span class="keyword">if</span>(<span class="keyword">try</span>[index]==col||<span class="built_in">abs</span>(col-<span class="keyword">try</span>[index])==(row-index))   <span class="comment">//测试(row,col)是否冲突</span>
+                conflict=<span class="literal">true</span>;
+            }
+            <span class="keyword">if</span>(conflict==<span class="literal">false</span>){   <span class="comment">//是安全的</span>
+                nb=nb+<span class="number">1</span>;
+                <span class="keyword">if</span>(uniform(nb)==<span class="number">1</span>)  <span class="comment">//或许放在第col列</span>
+                    randcol=col;   <span class="comment">//注意第一次uniform一定返回1，即j一定有值</span>
+            }  <span class="comment">//endif</span>
+        } <span class="comment">//enddo,</span>
+
+        <span class="keyword">if</span>(nb &gt;<span class="number">0</span> ){   <span class="comment">//nb=0时无安全位置，第row皇后尚未放好</span>
+                    <span class="comment">//在所有nb个安全位置上，(row)th皇后选择位置j的概率为1/nb</span>
+            <span class="keyword">try</span>[row] = randcol;
+        }
+        row++;
+    }<span class="keyword">while</span>(nb != <span class="number">0</span>&amp;&amp;row &lt; DIM); <span class="comment">//当前皇后找不到合适的位置或try是</span>
+                               <span class="comment">// DIM-promising时结束.</span>
+    <span class="keyword">if</span>(nb &gt; <span class="number">0</span>)
+        success = <span class="literal">true</span>;
+    <span class="keyword">else</span> 
+        success = <span class="literal">false</span>;
+    <span class="keyword">return</span> success;
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">SovleQueen</span><span class="params">()</span></span>{   <span class="comment">//不断调用LV算法直至成功</span>
+    <span class="keyword">bool</span> success;
+    <span class="keyword">int</span> chess[DIM];
+    <span class="keyword">int</span> row;
+    <span class="keyword">int</span> i;
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;DIM;i++)chess[i]=-<span class="number">1</span>;
+    <span class="keyword">do</span>{
+        success = QueensLv(chess);
+    }<span class="keyword">while</span>(success!=<span class="literal">true</span>);
+    <span class="keyword">for</span>(row = <span class="number">0</span>;row&lt;DIM;row++){
+        <span class="comment">//printf("%d ",chess[row]);</span>
+        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; chess[row]; i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
+        <span class="built_in">printf</span>(<span class="string">"X"</span>);
+        <span class="keyword">for</span>(i=chess[row]+<span class="number">1</span>;i&lt;DIM;i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
+        <span class="built_in">printf</span>(<span class="string">"\n"</span>);
+    }
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>{
+    <span class="keyword">int</span> index,j;
+    <span class="keyword">clock_t</span> start,end;
+    <span class="keyword">double</span> dur;
+    srand(time(<span class="number">0</span>));
+    start = clock();
+    SovleQueen();
+    end = clock();
+    dur = <span class="number">1000.0</span>*(end-start)/CLOCKS_PER_SEC;
+    <span class="built_in">printf</span>(<span class="string">"used: %f ms.\n"</span>,dur);
+
+}
+</code></pre>
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/随机算法/">
+- 随机算法</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title"><a href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/">电信服务商屏蔽digitalocean新加坡ip</a></h1>
+  
+
+    <time datetime="2014-11-29T06:17:05.000Z">
+  <span class="day">28</span><span class="month">Nov</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p>　　因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。</p>
+<p>　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方ping都不会产生如此高的丢包。</p>
+<p>　　室友说是GFW的问题。我觉得很认同。</p>
+<p>　　晚上的时候，我突然想到换个网络通出口，我平时一直用的是电信出口。我将网络通出口换成了移动出口，这一次，ssh连接成功了。延迟很低。就像在本地一样。但是如果用移动出口，访问国内网站又会效果不好。我这一次换成了教育网出口。显而易见，也是非常的通畅。把shadowsocks本地的配置更改了一下，浏览器代理加了规则list:<a href="http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。" target="_blank" rel="external">http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。</a> 今天完工。</p>
+<p>　　该死的电信防火墙。</p>
+
+    
+    
+    <footer class="meta">
+      
+      
+  <div class="tags">
+<a href="/tags/vps-digitalocean/">
+- vps
+- digitalocean</a></div>
+
+      
+    </footer>
+    
+  </div>
+  
+</article>
+
+
+<nav id="pagenavi">
+  
+    <a href="/" class="alignleft prev">上一頁</a>
+  
+  
+  <div class="clearfix"></div>
+</nav></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>

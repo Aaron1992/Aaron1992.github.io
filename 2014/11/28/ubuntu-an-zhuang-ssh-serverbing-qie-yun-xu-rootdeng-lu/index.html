@@ -3,9 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>彙整：2015/9 | Hexo</title>
+  <title>ubuntu 安装ssh-server并且允许root登陆 | Hexo</title>
   <meta name="author" content="John Doe">
 
+  
+  <meta name="description" content="安装ssh-server: sudo apt-get install ssh-server
+允许root账号通过ssh连接 编辑/etc/ssh/sshd_config文件，找到PermitRootLogin without-password 并在下边添加 PermitRootLogin yes 然">
   
   
 
@@ -26,36 +29,48 @@
     
   </ul>
 </nav></header>
-  <div id="content" class="inner">
-
-<header id="archive-header">
-  <h1 class="alignleft">彙整：2015/9</h1>
-  <div class="search alignright">
-    <form action="http://google.com/search" method="get" accept-charset="utf-8">
-      <input type="search" name="q" results="0" placeholder="搜尋">
-      <input type="hidden" name="q" value="site:yoursite.com">
-    </form>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
   </div>
-</header>
-
-
-  
-  
-    
-    
-      
-      </section><section class="archives"><div class="year">2015</div>
-    
-    <article class="archive">
-      <h1 class="title"><a href="/2015/09/12/hello-world/">Hello World</a></h1>
-      <footer>
-        <time datetime="2015-09-13T01:46:15.000Z">Sep 12</time>
-        
-        
-      </footer>
-    </article>
-  
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
 </div>
+  
+  <header>
+    
+  
+    <h1 class="title">ubuntu 安装ssh-server并且允许root登陆</h1>
+  
+
+    <time datetime="2014-11-29T07:05:57.000Z">
+  <span class="day">28</span><span class="month">Nov</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <ol>
+<li><strong>安装ssh-server:</strong><br> <code>sudo apt-get install ssh-server</code></li>
+<li><strong>允许root账号通过ssh连接</strong><br> 编辑<code>/etc/ssh/sshd_config</code>文件，找到<code>PermitRootLogin without-password</code><br> 并在下边添加<br> <code>PermitRootLogin yes</code><br> 然后<br> <code>service ssh restart</code>或<code>service ssh reload</code></li>
+</ol>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
   <footer id="footer" class="inner"><div class="social alignright">
   
   

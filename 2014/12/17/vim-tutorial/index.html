@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vim tutorial | Hexo</title>
+  <meta name="author" content="John Doe">
+
+  
+  <meta name="description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）
+####编辑Vim中有Normal(普通)，Inser">
+  
+  
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+</head>
+
+<body>
+  <header id="header" class="inner"><nav>
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+</nav></header>
+  <div id="content" class="inner"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <header>
+    
+  
+    <h1 class="title">Vim tutorial</h1>
+  
+
+    <time datetime="2014-12-17T15:47:47.000Z">
+  <span class="day">17</span><span class="month">Dec</span>
+</time>
+  </header>
+  <div class="entry-content">
+    
+      <p><em>写在前边</em><br>请忽略<strong>任何</strong>将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）</p>
+<p>####编辑<br>Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：</p>
+<ul>
+<li>i 在光标当前位置插入</li>
+<li>a 在光标当前位置之后插入</li>
+<li>I 在当前行起始位置插入</li>
+<li>A 在当前行末尾插入</li>
+<li>o 在当前行下方插入新的行</li>
+<li>O 在当前行上方插入一行</li>
+<li>s 删除当前位置的字符并在此插入</li>
+<li>S 删除当前行并进入编辑模式</li>
+<li>cw 替换当前位置的单词并进入编辑 (any movement command can be substituted for w)</li>
+<li>cc 同S (change line)</li>
+<li>C 删除从光标位置到行尾的单词并进入编辑模式</li>
+</ul>
+<p>####保存并退出<br>在普通模式下使用 <code>:q</code>退出不保存，<code>:w</code>保存，<code>:w &lt;filename&gt;</code>保存问<filenmae>,<code>:wq</code>或<code>:x</code>保存并退出</filenmae></p>
+<ul>
+<li>:wa    write all changed files (save all changes)</li>
+<li>:xa    exit all (save all changes and close Vim)</li>
+<li>:qa    quit all (close Vim, but not if there are unsaved changes)</li>
+<li>:qa!    quit all (close Vim without saving—discard any changes)</li>
+</ul>
+<hr>
+<p><em>reference:</em></p>
+<ul>
+<li><a href="http://vim.wikia.com/wiki/Tutorial" target="_blank" rel="external">http://vim.wikia.com/wiki/Tutorial</a></li>
+</ul>
+
+    
+    
+    <footer class="meta">
+      
+      
+      
+    </footer>
+    
+  </div>
+  
+</article></div>
+  <footer id="footer" class="inner"><div class="social alignright">
+  
+  
+  
+  
+  <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+</div>
+<p>
+  
+  &copy; 2015 John Doe
+  
+</p>
+<div class="clearfix"></div></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id="phasebeam">
+  <canvas></canvas>
+  <canvas></canvas>
+  <canvas></canvas>
+</div>
+<script src="/js/phasebeam.js"></script>
+</body>
+</html>
