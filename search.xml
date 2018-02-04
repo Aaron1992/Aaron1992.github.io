@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F02%2F04%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment test]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[appleid切换美区]]></title>
     <url>%2F2018%2F02%2F04%2Fappleid%E5%88%87%E6%8D%A2%E7%BE%8E%E5%8C%BA%2F</url>
     <content type="text"><![CDATA[以下内容摘自V2Ex, 经验证有效 刚刚那个美区 APP 被清空的帖子已经展示了我的智商…为了表示歉意(纠正一下我的智商)，我说一下 Apple ID 切换美区的一个奇淫技巧吧；刚刚测试把室友的切换过去了，此办法在切换过程无需任何支付卡号，目前百分百成功…但是为了巩固账号，我建议还是某宝买个礼品卡冲进去小小的消费一下，下面正题: 首先电脑安装 iTunes 最新版(iTunes 啊，不是 App Store)，我这里操作是 mac，如果 win 同学不好使，那只能去日苹果了(基本不可能)； 登陆你的 Apple ID，依次点击 “账户–&gt;查看我的账户–&gt;切换国家 /地区”； 进入贱贱的切换页面，然后一路确认到达支付信息页面，在最新版的 iTunes 中，支付方式是可以选择 Paypal 的； 点击 “Sign in Paypal”，浏览器会跳到 Paypal 登录页面； 最稳的一波操作是: 不管你登没登录，不用去绑卡，直接点击浏览器左下角的 “返回 iTunes” 按钮(应该是英文的)，此时你会发现 iTunes 刷新页面以后神奇的出现了 “None”… 接下来的操作就是找个美国信息，各种撸，最后别忘了充点钱消费一下 我感觉写完了我的智商好了点…玩原谅帽大作战又可以拿第一了 提醒: 尽快操作，这贴子发完了我估计不久这 Bug 可能会被修复 第 1 条附言 · 157 天前 经过多人验证，如果没有 Paypal 选项，请关闭 家庭共享。 如果出不来，可以试试在连接vpn后再试 不需要登录Paypal, 不需要登录Paypal, 不需要登录Paypal(我的登录了也用不了，要使用PayPal支付对此商家的预核准付款，您的PayPal账户和商家账户必须在同一个国家或地区注册。请返回到商家页面选择其他付款方式。) 美国人信息，搜索美国地址生成器即可。]]></content>
@@ -14,11 +19,6 @@
     <title><![CDATA[create git service with gog]]></title>
     <url>%2F2018%2F02%2F02%2Fcreate-git-service-with-gog%2F</url>
     <content type="text"><![CDATA[使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。 升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错误的原因主要是因为 Because of mysql 5.6 (includes prior versions) InnoDB max index length is 767 bytes, mysql 5.7.7 is up to 3072 bytes.If some varchar column’s length is 255, when the character format is utf-8 needs 2553=765 bytes for index length, It’s OK.But, an utf8mb needs 2554=1020 bytes for index length.写这篇文章的时候gog暂时还没有修复这个bug,最简单的办法是升级mysql, 在centos上即mariadb.过程如下： Once you have your MariaDB.repo entry, add it to a file under /etc/yum.repos.d/. (We suggest something like /etc/yum.repos.d/MariaDB.repo.) 12345[mariadb]name = MariaDBbaseurl = http://yum.mariadb.org/10.2/centos7-amd64gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDBgpgcheck=1 之后执行yum update以及yum install mariadb-server即可。]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F01%2F21%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
     <title><![CDATA[使用fail2ban阻止暴力破解ssh]]></title>
