@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="ZH-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="discompyle,py2exe,python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="py2exe是一个将python脚本转换成windows上的可独立执行的可执行程序(*.exe)的工具，这样，你就可以不用装python而在windows系统上运行这个可执行程序。然而如果不对代码做任何混淆，仅使用Py2exe将程序打包的程序容易被破解。本文讲解破解Py2exe打包的程序的过程。
+Py2exe打包的程序的结构Py2exe打包的exe程序有三部分组成，分别是PYTHONxx.dll(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="破解py2exe打包的程序">
+<meta property="og:url" content="http://localhost/2015/12/31/破解py2exe打包的程序/index.html">
+<meta property="og:site_name" content="NyanNyan">
+<meta property="og:description" content="py2exe是一个将python脚本转换成windows上的可独立执行的可执行程序(*.exe)的工具，这样，你就可以不用装python而在windows系统上运行这个可执行程序。然而如果不对代码做任何混淆，仅使用Py2exe将程序打包的程序容易被破解。本文讲解破解Py2exe打包的程序的过程。
+Py2exe打包的程序的结构Py2exe打包的exe程序有三部分组成，分别是PYTHONxx.dll(">
+<meta property="og:image" content="http://localhost/content/images/2015/12/script1.png">
+<meta property="og:image" content="http://localhost/content/images/2015/12/script2.png">
+<meta property="og:image" content="http://localhost/content/images/2015/12/script3.png">
+<meta property="og:image" content="http://localhost/content/images/2015/12/code1.png">
+<meta property="og:updated_time" content="2015-12-31T07:44:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="破解py2exe打包的程序">
+<meta name="twitter:description" content="py2exe是一个将python脚本转换成windows上的可独立执行的可执行程序(*.exe)的工具，这样，你就可以不用装python而在windows系统上运行这个可执行程序。然而如果不对代码做任何混淆，仅使用Py2exe将程序打包的程序容易被破解。本文讲解破解Py2exe打包的程序的过程。
+Py2exe打包的程序的结构Py2exe打包的exe程序有三部分组成，分别是PYTHONxx.dll(">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost/2015/12/31/破解py2exe打包的程序/"/>
+
+
+
+
+
+  <title>破解py2exe打包的程序 | NyanNyan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="ZH-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NyanNyan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2015/12/31/破解py2exe打包的程序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NyanNyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">破解py2exe打包的程序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2015-12-31T10:31:52+08:00">
+                2015-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/diasembel/" itemprop="url" rel="index">
+                    <span itemprop="name">diasembel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/12/31/破解py2exe打包的程序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/12/31/破解py2exe打包的程序/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>py2exe是一个将python脚本转换成windows上的可独立执行的可执行程序(*.exe)的工具，这样，你就可以不用装python而在windows系统上运行这个可执行程序。然而如果不对代码做任何混淆，仅使用Py2exe将程序打包的程序容易被破解。本文讲解破解Py2exe打包的程序的过程。</p>
+<h2 id="Py2exe打包的程序的结构">Py2exe打包的程序的结构</h2><p>Py2exe打包的exe程序有三部分组成，分别是PYTHONxx.dll(xx是版本号，比如27), PYTHONSCRIPT, library.zip。PYTHON27.dll应该就是python的运行环境了。PYTHONSCRIPT是程序开始执行的入口，就想main函数。libarary.zip中是程序用到的库文件，包括自带的库和用户自己写的库文件。 破解程序的时候需要处理的文件就是PYTHONSCRIPT和library.zip。</p>
+<p>如果直接使用winrar解压缩exe的pe文件，只能得到library.zip中的文件，如果想要得到全部的文件，需要对处理pe文件。幸运的是，现在已经有程序可以做这个工作： py2exe binary editor。 使用Py2exe Bynary Editor(以下简称pbe) 可以简单的将Py2exe打包的程序dump成原来的三个文件，也可以将修改后的文件再打包回去。使用界面如图。</p>
+<h2 id="逆向library-zip中的文件">逆向library.zip中的文件</h2><p>解压缩library.zip中的文件，可以看到有很多的pyo文件。这是python脚本优化过的字节码。不能直接阅读，需要先反编译成py文件。反编译python字节码的工具有很多，我这里使用uncompyle2，uncompile2可以反编译python2.5 到 2.7的文件，如果你需要反编译其他版本的文件，需要使用其他工具。使用uncompule2 可以很简单的将pyo文件反编译成原来的文件。从效果上看，几乎与看源代码无异。这里将不再对uncompyle2的安装和使用进行介绍。具体操作可以看官方文档，或者我下次更新文章时会写出来。</p>
+<p>将pyo文件反编译后，找到需要修改的代码，在文件中修改。然后再使用如下命令将修改后的py文件编译成pyo文件：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python</span> -O -<span class="keyword">m</span> py_compile filename.<span class="keyword">py</span></span><br></pre></td></tr></table></figure></p>
+<p>然后用修改后的pyo文件替换library.zip中的文件的源文件。最后，使用pbe仍打开pe文件，最好勾选update options下的Backup Original. 然后点击下边的library，在弹出的窗口中选择更新后的library.zip。然后pbe就会使用更改后的library更新原来的pe文件，而原文件的备份保存为后缀为bak的文件。</p>
+<h2 id="逆向PYTHONSCRIPT文件">逆向PYTHONSCRIPT文件</h2><p>PYTHONSCRIPT文件处理起来相对更麻烦一些。通过阅读py2exe的源码可以了解到该文件的结构, 下边截取了build_exe.py文件里的一部分代码。不关心内容的可以直接跳到逆向的处理过程。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># We create a list of code objects, and write it as a marshaled</span></span><br><span class="line"> <span class="comment"># stream.  The framework code then just exec's these in order.</span></span><br><span class="line"> <span class="comment"># First is our common boot script.</span></span><br><span class="line"> boot = self.get_boot_script(<span class="string">"common"</span>)</span><br><span class="line"> boot_code = compile(file(boot, <span class="string">"U"</span>).read(),</span><br><span class="line">                     os.path.abspath(boot), <span class="string">"exec"</span>)</span><br><span class="line"> code_objects = [boot_code]</span><br><span class="line"> <span class="keyword">if</span> self.bundle_files &lt; <span class="number">3</span>:</span><br><span class="line">     code_objects.append(</span><br><span class="line">         compile(<span class="string">"import zipextimporter; zipextimporter.install()"</span>,</span><br><span class="line">                 <span class="string">"&lt;install zipextimporter&gt;"</span>, <span class="string">"exec"</span>))</span><br><span class="line"> <span class="keyword">for</span> var_name, var_val <span class="keyword">in</span> vars.items():</span><br><span class="line">     code_objects.append(</span><br><span class="line">             compile(<span class="string">"%s=%r\n"</span> % (var_name, var_val), var_name, <span class="string">"exec"</span>)</span><br><span class="line">     )</span><br><span class="line"> <span class="keyword">if</span> self.custom_boot_script:</span><br><span class="line">     code_object = compile(file(self.custom_boot_script, <span class="string">"U"</span>).read() + <span class="string">"\n"</span>,</span><br><span class="line">                           os.path.abspath(self.custom_boot_script), <span class="string">"exec"</span>)</span><br><span class="line">     code_objects.append(code_object)</span><br><span class="line"> <span class="keyword">if</span> script:</span><br><span class="line">     code_object = compile(open(script, <span class="string">"U"</span>).read() + <span class="string">"\n"</span>,</span><br><span class="line">                           os.path.basename(script), <span class="string">"exec"</span>)</span><br><span class="line">     code_objects.append(code_object)</span><br><span class="line"> code_bytes = marshal.dumps(code_objects)</span><br><span class="line"> <span class="keyword">if</span> self.distribution.zipfile <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">     relative_arcname = <span class="string">""</span></span><br><span class="line"> si = struct.pack(<span class="string">"iiii"</span>,</span><br><span class="line">                  <span class="number">0x78563412</span>, <span class="comment"># a magic value,</span></span><br><span class="line">                  self.optimize,</span><br><span class="line">                  self.unbuffered,</span><br><span class="line">                  len(code_bytes),</span><br><span class="line">                  ) + relative_arcname + <span class="string">"\000"</span></span><br><span class="line">script_bytes = si + code_bytes + <span class="string">'\000\000'</span></span><br><span class="line">self.announce(<span class="string">"add script resource, %d bytes"</span> % len(script_bytes))</span><br></pre></td></tr></table></figure></p>
+<p>倒数第二行的script_bytes就是最后写入PYTHONSCRIPT文件中的内容。code_bytes是个marshal处理过的list, list中有我们关心的代码。si是一个4个整形大小的结构。</p>
+<h3 id="处理过程">处理过程</h3><p>首先，使用二进制编辑软件将头部的4个整数si和最后的两个0字节去掉，这里使用winhex的示例如图，将阴影部分的内容删去。</p>
+<p><img src="/content/images/2015/12/script1.png" alt="winhex处理头部"></p>
+<p><img src="/content/images/2015/12/script2.png" alt="winhex处理尾部"></p>
+<p>将得到的文件另存为一个新的文件，这样就只剩下了 code_bytes。</p>
+<p>在 Python 中输入：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt;import marshal</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt;mylist=marshal.load(open(<span class="string">"dumpfile"</span>, <span class="string">"r"</span>))  <span class="comment">#目的是为了把 dump 下来的文件加载到内存当中，成为 Python 的一个对象。</span></span><br></pre></td></tr></table></figure>
+<p><em>注1：加载dump下来的对象，Python 版本一定要和 dump 时候的版本兼容才行。</em><br><em>注2：如果出现<code>EOFError: EOF read where object expected</code>错误，更换到linux操作系统可能可以解决。</em></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;mylist</span><br><span class="line">[&lt;<span class="tag">code</span> <span class="tag">object</span> &lt;module&gt; at <span class="number">0</span>xb7473ad0, file <span class="string">"C:\Python27\lib\site-packages\py2exe\boot_common.py"</span>, line <span class="number">44</span>&gt;, &lt;<span class="tag">code</span> <span class="tag">object</span> &lt;module&gt; at <span class="number">0</span>xb7473b18, file <span class="string">"&lt;install zipextimporter&gt;"</span>, line <span class="number">1</span>&gt;, &lt;<span class="tag">code</span> <span class="tag">object</span> &lt;module&gt; at <span class="number">0</span>xb7202a88, file <span class="string">"main.py"</span>, line <span class="number">3</span>&gt;]    #包含了 <span class="number">3</span> 个 <span class="tag">code</span> <span class="tag">object</span> 对象。第一个是 py2exe 初始化用的，第二个是解压 zip 用的，第三个就是我们的关键脚本了。</span><br></pre></td></tr></table></figure>
+<p>为了反编译主函数的代码，我们将main.py的code object保存到文件中，然后仍然使用umcompyle2反编译。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt;&gt;&gt;&gt; marshal.dump(mylist[<span class="number">2</span>], open(<span class="string">"main.pyo"</span>,<span class="string">"w"</span>))   <span class="comment"># 将main函数的内容dump到pyo文件中</span></span><br></pre></td></tr></table></figure>
+<p>仅仅将code object dump到文件中还不行，还需要再文件头部添加文件头。用 WinHex 加上 8 个字节的 file header。前 4 个字节代表 Python 版本号，后 4 个字节是 timestamp，可以打开另外一个pyo文件将前 8 个字节复制过去(图中阴影部分)。<br><img src="/content/images/2015/12/script3.png" alt="winhex添加文件头"></p>
+<p>然后使用uncompyle2反编译修改后的文件，得到源码。修改过代码之后，按照和本节相反的顺序，打包到源文件中去。<br><img src="/content/images/2015/12/code1.png" alt="反编译代码"></p>
+<h2 id="结语">结语</h2><p>将py2exe打包的pe程序反编译回python代码后，如果未经混淆，可以看到几乎与源码无异。Python 开发的商业软件，其安全性还值得商榷。抵御攻击的做法是使用第三方库编译成 native code，使用代码混淆器，或者修改 Python 源代码防止被反汇编。</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://bbs.pediy.com/archive/index.php?t-111428.html" target="_blank" rel="external">http://bbs.pediy.com/archive/index.php?t-111428.html</a></li>
+<li><a href="https://github.com/wibiti/uncompyle2" target="_blank" rel="external">https://github.com/wibiti/uncompyle2</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/discompyle/" rel="tag"># discompyle</a>
+          
+            <a href="/tags/py2exe/" rel="tag"># py2exe</a>
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/13/hashcat破解office密码/" rel="next" title="hashcat破解office(97-03,2007,2010,2013)密码">
+                <i class="fa fa-chevron-left"></i> hashcat破解office(97-03,2007,2010,2013)密码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/12/fail2ban/" rel="prev" title="使用fail2ban阻止暴力破解ssh">
+                使用fail2ban阻止暴力破解ssh <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ring0.me/" title="BojieLi" target="_blank">BojieLi</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Py2exe打包的程序的结构"><span class="nav-number">1.</span> <span class="nav-text">Py2exe打包的程序的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向library-zip中的文件"><span class="nav-number">2.</span> <span class="nav-text">逆向library.zip中的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向PYTHONSCRIPT文件"><span class="nav-number">3.</span> <span class="nav-text">逆向PYTHONSCRIPT文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理过程"><span class="nav-number">3.1.</span> <span class="nav-text">处理过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://localhost/2015/12/31/破解py2exe打包的程序/';
+          this.page.identifier = '2015/12/31/破解py2exe打包的程序/';
+          this.page.title = '破解py2exe打包的程序';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://short-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
