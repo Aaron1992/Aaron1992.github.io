@@ -68,8 +68,7 @@
 
 
 
-  <meta name="keywords" content="
-- 随机算法," />
+  <meta name="keywords" content="life, programming" />
 
 
 
@@ -80,52 +79,16 @@
 
 
 
-<meta name="description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
+<meta name="description">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Las Vegas随机算法求N皇后问题的解">
-<meta property="og:url" content="http://localhost/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/index.html">
+<meta property="og:title" content="生日攻击(平方根攻击)">
+<meta property="og:url" content="http://localhost/2018/02/06/找工作/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
-<meta property="og:updated_time" content="2014-11-28T15:04:52.000Z">
+<meta property="og:description">
+<meta property="og:updated_time" content="2018-02-07T16:19:50.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Las Vegas随机算法求N皇后问题的解">
-<meta name="twitter:description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
+<meta name="twitter:title" content="生日攻击(平方根攻击)">
+<meta name="twitter:description">
 
 
 
@@ -155,13 +118,13 @@ int uniform(int n){   //random function
 
 
 
-  <link rel="canonical" href="http://localhost/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/"/>
+  <link rel="canonical" href="http://localhost/2018/02/06/找工作/"/>
 
 
 
 
 
-  <title>使用Las Vegas随机算法求N皇后问题的解 | NyanNyan</title>
+  <title>生日攻击(平方根攻击) | NyanNyan</title>
   
 
 
@@ -332,7 +295,7 @@ int uniform(int n){   //random function
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2018/02/06/找工作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aaron">
@@ -349,7 +312,7 @@ int uniform(int n){   //random function
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Las Vegas随机算法求N皇后问题的解</h1>
+          <h1 class="post-title" itemprop="name headline">生日攻击(平方根攻击)</h1>
         
 
         <div class="post-meta">
@@ -361,8 +324,8 @@ int uniform(int n){   //random function
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2014-11-28T22:23:07+08:00">
-                2014-11-28
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-02-06T23:08:13+08:00">
+                2018-02-06
               </time>
             
 
@@ -380,9 +343,9 @@ int uniform(int n){   //random function
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/06/找工作/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/06/找工作/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -410,91 +373,7 @@ int uniform(int n){   //random function
       
 
       
-        <pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
-<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span>
-<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;time.h&gt;</span></span>
-
-<span class="preprocessor">#<span class="keyword">define</span> bool int</span>
-<span class="preprocessor">#<span class="keyword">define</span> true <span class="number">1</span></span>
-<span class="preprocessor">#<span class="keyword">define</span> false <span class="number">0</span></span>
-
-<span class="preprocessor">#<span class="keyword">define</span> DIM <span class="number">50</span> </span>
-
-<span class="function"><span class="keyword">int</span> <span class="title">uniform</span><span class="params">(<span class="keyword">int</span> n)</span></span>{   <span class="comment">//random function</span>
-    <span class="keyword">double</span> r;
-    <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)
-    <span class="keyword">return</span> -<span class="number">1</span>;
-    r=rand();
-    <span class="keyword">return</span> (<span class="keyword">int</span>)(r/RAND_MAX*(n-<span class="number">1</span>))+<span class="number">1</span>;
-}
-
-<span class="function"><span class="keyword">bool</span> <span class="title">QueensLv</span><span class="params">(<span class="keyword">int</span> <span class="keyword">try</span>[])</span></span>{   <span class="comment">//LV算法解决N皇后问题</span>
-    <span class="keyword">int</span> index,nb;
-    <span class="keyword">int</span> col,randcol;
-    <span class="keyword">bool</span> conflict=<span class="literal">false</span>;
-    <span class="keyword">int</span> row=<span class="number">0</span>;
-    <span class="keyword">bool</span> success=<span class="literal">false</span>;
-
-    <span class="keyword">do</span> {   <span class="comment">//从第一行开始</span>
-        nb=<span class="number">0</span>;    <span class="comment">////计数器，nb值为（row)th皇后的open位置总数</span>
-        <span class="keyword">for</span>(col=<span class="number">0</span>;col&lt;DIM;col++){   <span class="comment">//从第一列开始</span>
-            conflict = <span class="literal">false</span>;
-            <span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;row;index++){
-                <span class="keyword">if</span>(<span class="keyword">try</span>[index]==col||<span class="built_in">abs</span>(col-<span class="keyword">try</span>[index])==(row-index))   <span class="comment">//测试(row,col)是否冲突</span>
-                conflict=<span class="literal">true</span>;
-            }
-            <span class="keyword">if</span>(conflict==<span class="literal">false</span>){   <span class="comment">//是安全的</span>
-                nb=nb+<span class="number">1</span>;
-                <span class="keyword">if</span>(uniform(nb)==<span class="number">1</span>)  <span class="comment">//或许放在第col列</span>
-                    randcol=col;   <span class="comment">//注意第一次uniform一定返回1，即j一定有值</span>
-            }  <span class="comment">//endif</span>
-        } <span class="comment">//enddo,</span>
-
-        <span class="keyword">if</span>(nb &gt;<span class="number">0</span> ){   <span class="comment">//nb=0时无安全位置，第row皇后尚未放好</span>
-                    <span class="comment">//在所有nb个安全位置上，(row)th皇后选择位置j的概率为1/nb</span>
-            <span class="keyword">try</span>[row] = randcol;
-        }
-        row++;
-    }<span class="keyword">while</span>(nb != <span class="number">0</span>&amp;&amp;row &lt; DIM); <span class="comment">//当前皇后找不到合适的位置或try是</span>
-                               <span class="comment">// DIM-promising时结束.</span>
-    <span class="keyword">if</span>(nb &gt; <span class="number">0</span>)
-        success = <span class="literal">true</span>;
-    <span class="keyword">else</span> 
-        success = <span class="literal">false</span>;
-    <span class="keyword">return</span> success;
-}
-
-<span class="function"><span class="keyword">int</span> <span class="title">SovleQueen</span><span class="params">()</span></span>{   <span class="comment">//不断调用LV算法直至成功</span>
-    <span class="keyword">bool</span> success;
-    <span class="keyword">int</span> chess[DIM];
-    <span class="keyword">int</span> row;
-    <span class="keyword">int</span> i;
-    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;DIM;i++)chess[i]=-<span class="number">1</span>;
-    <span class="keyword">do</span>{
-        success = QueensLv(chess);
-    }<span class="keyword">while</span>(success!=<span class="literal">true</span>);
-    <span class="keyword">for</span>(row = <span class="number">0</span>;row&lt;DIM;row++){
-        <span class="comment">//printf("%d ",chess[row]);</span>
-        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; chess[row]; i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
-        <span class="built_in">printf</span>(<span class="string">"X"</span>);
-        <span class="keyword">for</span>(i=chess[row]+<span class="number">1</span>;i&lt;DIM;i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
-        <span class="built_in">printf</span>(<span class="string">"\n"</span>);
-    }
-}
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>{
-    <span class="keyword">int</span> index,j;
-    <span class="keyword">clock_t</span> start,end;
-    <span class="keyword">double</span> dur;
-    srand(time(<span class="number">0</span>));
-    start = clock();
-    SovleQueen();
-    end = clock();
-    dur = <span class="number">1000.0</span>*(end-start)/CLOCKS_PER_SEC;
-    <span class="built_in">printf</span>(<span class="string">"used: %f ms.\n"</span>,dur);
-
-}
-</code></pre>
+        
       
     </div>
     
@@ -509,13 +388,6 @@ int uniform(int n){   //random function
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/随机算法/" rel="tag"># 
-- 随机算法</a>
-          
-        </div>
-      
 
       
       
@@ -525,8 +397,8 @@ int uniform(int n){   //random function
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/" rel="next" title="电信服务商屏蔽digitalocean新加坡ip">
-                <i class="fa fa-chevron-left"></i> 电信服务商屏蔽digitalocean新加坡ip
+              <a href="/2018/02/04/gogs和git-hook实现hex博客一键式部署/" rel="next" title="hexo博客一键式部署到服务器">
+                <i class="fa fa-chevron-left"></i> hexo博客一键式部署到服务器
               </a>
             
           </div>
@@ -534,10 +406,6 @@ int uniform(int n){   //random function
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/" rel="prev" title="ubuntu 安装ssh-server并且允许root登陆">
-                ubuntu 安装ssh-server并且允许root登陆 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -838,9 +706,9 @@ int uniform(int n){   //random function
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://localhost/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/';
-          this.page.identifier = '2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/';
-          this.page.title = '使用Las Vegas随机算法求N皇后问题的解';
+          this.page.url = 'http://localhost/2018/02/06/找工作/';
+          this.page.identifier = '2018/02/06/找工作/';
+          this.page.title = '生日攻击(平方根攻击)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://short-blog.disqus.com/embed.js';
