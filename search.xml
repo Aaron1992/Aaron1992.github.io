@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[找安全相关工作]]></title>
-    <url>%2F2018%2F02%2F06%2F%E6%89%BE%E5%B7%A5%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[越来越觉得通信确实不是我的菜，再这么下去人要废了。现在找安全相关的工作.简历]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[hexo博客一键式部署到服务器]]></title>
     <url>%2F2018%2F02%2F04%2Fgogs%E5%92%8Cgit-hook%E5%AE%9E%E7%8E%B0hex%E5%8D%9A%E5%AE%A2%E4%B8%80%E9%94%AE%E5%BC%8F%E9%83%A8%E7%BD%B2%2F</url>
     <content type="text"><![CDATA[hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。 搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接 安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。 设置hexo的git同步方式在hexo的_config.yml文件中, 配置如下的git部署信息，其中repo字段可以在gogs网页上创建仓库后的页面找到。配置完以后，在本地运行hexo d会将public目录推送到git服务器。 12345deploy: type: git repo: &lt;ssh_name&gt;@git.gitserver:&lt;account&gt;/blog_public.git branch: master message: update blog 创建服务器git仓库为了在服务器上访问blog_public仓库的文件，还需要在服务器的网站目录添加git本地仓库，用来存储生成的网站文件。这个文件夹同时也是网站的目录，通过配置nginx，完成对该目录的访问。 1234mkdir /var/www/blog_publiccd /var/www/blog_publicgit initgit clone ~/repos/test.git 使用githook实现自动部署进入到/gogs-repositories//blog_public.git/hooks文件夹，使用vi post-receive创建一个脚本，当你在本地仓库执行git push后就会触发post-receive（关于Git Hok）。post-receive的内容 12345678910#!/usr/bin/env bashunset GIT_DIRNowPath=`pwd`#部署路径为网站服务器设置的文件目录DeployPath="/var/www/blog_public"cd $DeployPathgit pull origin mastercd $NowPathexit 0 之后在本地使用git deploy命令触发提交后，会自动以上脚本，实现自动部署。]]></content>
