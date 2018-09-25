@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,8 +18,11 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -38,10 +50,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -50,44 +58,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="life, programming" />
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
 
 
 
 
 
 
-
-
-
-
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NyanNyan">
-<meta property="og:url" content="http://localhost/page/2/index.html">
-<meta property="og:site_name" content="NyanNyan">
-<meta property="og:description">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NyanNyan">
-<meta name="twitter:description">
 
 
 
@@ -96,15 +85,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '5.1.4',
+    version: '',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -116,12 +103,35 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NyanNyan">
+<meta property="og:url" content="http://localhost/page/2/index.html">
+<meta property="og:site_name" content="NyanNyan">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NyanNyan">
+<meta name="twitter:description">
+
+
+
+
+
 
   <link rel="canonical" href="http://localhost/page/2/"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>NyanNyan</title>
   
@@ -132,6 +142,34 @@
 
 
 
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -152,19 +190,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">NyanNyan</span>
+        <span class="site-title"></span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -172,122 +208,90 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Trang Chủ</a>
+  </li>
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-resource">
-          <a href="/resource/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            资源
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Giới Thiệu</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Thẻ</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Đầu Mục</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Lưu Trữ</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-resource">
+    <a href="/resource/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />resource</a>
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
 
-
-
-    </div>
   
 </nav>
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -298,6 +302,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -324,25 +330,40 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="url">Meteor使用现有的mongodb数据库</a></h1>
+                <a class="post-title-link" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="url">
+                  Meteor使用现有的mongodb数据库
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-01T11:26:30+08:00">
-                2015-05-01
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2015-05-01 11:26:30 / Được thay đổi: 11:29:31" itemprop="dateCreated datePublished" datetime="2015-05-01T11:26:30+08:00">2015-05-01</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -356,6 +377,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="commentCount"></span>
                 </a>
@@ -393,14 +415,17 @@
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -439,6 +464,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -463,25 +490,40 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" itemprop="url">字母转换大小写</a></h1>
+                <a class="post-title-link" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" itemprop="url">
+                  字母转换大小写
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-01T09:04:20+08:00">
-                2015-05-01
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2015-05-01 09:04:20 / Được thay đổi: 09:05:01" itemprop="dateCreated datePublished" datetime="2015-05-01T09:04:20+08:00">2015-05-01</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -495,6 +537,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" itemprop="commentCount"></span>
                 </a>
@@ -532,14 +575,17 @@ c语言示例代码1234567891011121314//小写转换成大写char upper(char inp
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -578,6 +624,8 @@ c语言示例代码1234567891011121314//小写转换成大写char upper(char inp
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -602,25 +650,40 @@ c语言示例代码1234567891011121314//小写转换成大写char upper(char inp
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/17/vim-tutorial/" itemprop="url">Vim tutorial</a></h1>
+                <a class="post-title-link" href="/2014/12/17/vim-tutorial/" itemprop="url">
+                  Vim tutorial
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-17T07:47:47+08:00">
-                2014-12-17
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-17 07:47:47 / Được thay đổi: 08:30:38" itemprop="dateCreated datePublished" datetime="2014-12-17T07:47:47+08:00">2014-12-17</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -634,6 +697,7 @@ c语言示例代码1234567891011121314//小写转换成大写char upper(char inp
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/17/vim-tutorial/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/17/vim-tutorial/" itemprop="commentCount"></span>
                 </a>
@@ -686,14 +750,17 @@ C 删除从光标位置到行尾的单词并进入编辑模式
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/17/vim-tutorial/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/17/vim-tutorial/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -732,6 +799,8 @@ C 删除从光标位置到行尾的单词并进入编辑模式
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -756,25 +825,40 @@ C 删除从光标位置到行尾的单词并进入编辑模式
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/" itemprop="url">Vim 学习笔记-使用tab分页（1）</a></h1>
+                <a class="post-title-link" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/" itemprop="url">
+                  Vim 学习笔记-使用tab分页（1）
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-09T07:29:30+08:00">
-                2014-12-09
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-09 07:29:30 / Được thay đổi: 08:36:04" itemprop="dateCreated datePublished" datetime="2014-12-09T07:29:30+08:00">2014-12-09</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -788,6 +872,7 @@ C 删除从光标位置到行尾的单词并进入编辑模式
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/" itemprop="commentCount"></span>
                 </a>
@@ -828,14 +913,17 @@ C 删除从光标位置到行尾的单词并进入编辑模式
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -874,6 +962,8 @@ C 删除从光标位置到行尾的单词并进入编辑模式
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -898,25 +988,52 @@ C 删除从光标位置到行尾的单词并进入编辑模式
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/08/vim-xue-xi-bi-ji-1/" itemprop="url">Vim 学习笔记-复制和粘贴</a></h1>
+                <a class="post-title-link" href="/2014/12/08/vim-xue-xi-bi-ji-1/" itemprop="url">
+                  Vim 学习笔记-复制和粘贴
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-08T08:37:08+08:00">
-                2014-12-08
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-08 08:37:08" itemprop="dateCreated datePublished" datetime="2014-12-08T08:37:08+08:00">2014-12-08</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Được thay đổi: 2014-12-17 08:32:00" itemprop="dateModified" datetime="2014-12-17T08:32:00+08:00">2014-12-17</time>
+              
             
           </span>
 
@@ -930,6 +1047,7 @@ C 删除从光标位置到行尾的单词并进入编辑模式
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/08/vim-xue-xi-bi-ji-1/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/08/vim-xue-xi-bi-ji-1/" itemprop="commentCount"></span>
                 </a>
@@ -981,14 +1099,17 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/08/vim-xue-xi-bi-ji-1/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/08/vim-xue-xi-bi-ji-1/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1027,6 +1148,8 @@ tips: d = delete = cut y = yank = copy
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1051,25 +1174,40 @@ tips: d = delete = cut y = yank = copy
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/" itemprop="url">用python制作一个简单爬虫下载500px的图片</a></h1>
+                <a class="post-title-link" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/" itemprop="url">
+                  用python制作一个简单爬虫下载500px的图片
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-07T08:37:46+08:00">
-                2014-12-07
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-07 08:37:46 / Được thay đổi: 09:34:28" itemprop="dateCreated datePublished" datetime="2014-12-07T08:37:46+08:00">2014-12-07</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -1083,6 +1221,7 @@ tips: d = delete = cut y = yank = copy
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/" itemprop="commentCount"></span>
                 </a>
@@ -1121,14 +1260,17 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1167,6 +1309,8 @@ tips: d = delete = cut y = yank = copy
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1191,25 +1335,52 @@ tips: d = delete = cut y = yank = copy
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/" itemprop="url">大话同步/异步、阻塞/非阻塞</a></h1>
+                <a class="post-title-link" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/" itemprop="url">
+                  大话同步/异步、阻塞/非阻塞
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-02T04:13:57+08:00">
-                2014-12-02
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-02 04:13:57" itemprop="dateCreated datePublished" datetime="2014-12-02T04:13:57+08:00">2014-12-02</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Được thay đổi: 2014-12-03 03:15:49" itemprop="dateModified" datetime="2014-12-03T03:15:49+08:00">2014-12-03</time>
+              
             
           </span>
 
@@ -1223,6 +1394,7 @@ tips: d = delete = cut y = yank = copy
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/" itemprop="commentCount"></span>
                 </a>
@@ -1269,14 +1441,17 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1315,6 +1490,8 @@ tips: d = delete = cut y = yank = copy
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1339,25 +1516,52 @@ tips: d = delete = cut y = yank = copy
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/" itemprop="url">ghost blog安装过程</a></h1>
+                <a class="post-title-link" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/" itemprop="url">
+                  ghost blog安装过程
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-02T03:13:53+08:00">
-                2014-12-02
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-12-02 03:13:53" itemprop="dateCreated datePublished" datetime="2014-12-02T03:13:53+08:00">2014-12-02</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Được thay đổi: 2014-12-05 03:57:52" itemprop="dateModified" datetime="2014-12-05T03:57:52+08:00">2014-12-05</time>
+              
             
           </span>
 
@@ -1371,6 +1575,7 @@ tips: d = delete = cut y = yank = copy
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/" itemprop="commentCount"></span>
                 </a>
@@ -1411,14 +1616,17 @@ curl -sL https://deb.nodesource.com/setup | bash -
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1457,6 +1665,8 @@ curl -sL https://deb.nodesource.com/setup | bash -
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1481,25 +1691,40 @@ curl -sL https://deb.nodesource.com/setup | bash -
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/" itemprop="url">ubuntu 安装ssh-server并且允许root登陆</a></h1>
+                <a class="post-title-link" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/" itemprop="url">
+                  ubuntu 安装ssh-server并且允许root登陆
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-11-28T23:05:57+08:00">
-                2014-11-28
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-11-28 23:05:57 / Được thay đổi: 23:16:35" itemprop="dateCreated datePublished" datetime="2014-11-28T23:05:57+08:00">2014-11-28</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -1513,6 +1738,7 @@ curl -sL https://deb.nodesource.com/setup | bash -
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/" itemprop="commentCount"></span>
                 </a>
@@ -1552,14 +1778,17 @@ curl -sL https://deb.nodesource.com/setup | bash -
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1598,6 +1827,8 @@ curl -sL https://deb.nodesource.com/setup | bash -
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1622,25 +1853,40 @@ curl -sL https://deb.nodesource.com/setup | bash -
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="url">使用Las Vegas随机算法求N皇后问题的解</a></h1>
+                <a class="post-title-link" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="url">
+                  使用Las Vegas随机算法求N皇后问题的解
+                </a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-11-28T22:23:07+08:00">
-                2014-11-28
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2014-11-28 22:23:07 / Được thay đổi: 23:04:52" itemprop="dateCreated datePublished" datetime="2014-11-28T22:23:07+08:00">2014-11-28</time>
             
 
             
+              
 
+              
             
           </span>
 
@@ -1654,6 +1900,7 @@ curl -sL https://deb.nodesource.com/setup | bash -
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="commentCount"></span>
                 </a>
@@ -1716,14 +1963,17 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#thêm" rel="contents">
-              阅读全文 &raquo;
+            <a class="btn" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#more" rel="contents">
+              Đọc tiếp &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
     </div>
+
+    
+
     
     
     
@@ -1758,15 +2008,12 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
 
           </div>
-          
-
-
           
 
         </div>
@@ -1797,42 +2044,68 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">bài viết</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">mục</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">21</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">thẻ</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
 
@@ -1859,6 +2132,9 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
           
 
           
+            
+          
+          
 
         </div>
       </section>
@@ -1877,17 +2153,21 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Aaron</span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
 
   
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+  <div class="powered-by">Cung cấp bởi <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.1.1</div>
 
 
 
@@ -1895,12 +2175,13 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">Giao Diện – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
 
 
 
 
         
+
 
 
 
@@ -1920,7 +2201,10 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -1939,7 +2223,11 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -1959,16 +2247,6 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -1977,18 +2255,13 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
 
 
 
@@ -1996,9 +2269,9 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
   
 
 
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
 
 
 
@@ -2007,35 +2280,17 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
 
 
 
   
 
-
+  
+    <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
   
 
-    
-      <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
-    
-
-    
-
   
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
@@ -2050,323 +2305,6 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
   
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
 
 
 
@@ -2378,6 +2316,12 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
   
 
   
+
+  
+  
+
+  
+
   
 
   

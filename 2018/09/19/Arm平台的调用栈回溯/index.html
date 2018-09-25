@@ -2,6 +2,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
@@ -9,8 +18,11 @@
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -38,10 +50,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -50,46 +58,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="life, programming" />
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
 
 
 
 
 
 
-
-
-
-
-<meta name="description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
-<meta property="og:type" content="article">
-<meta property="og:title" content="arm平台的调用栈回溯(backtrace)">
-<meta property="og:url" content="http://localhost/2018/09/19/Arm平台的调用栈回溯/index.html">
-<meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
-<meta property="og:image" content="http://localhost/images/stack.svg">
-<meta property="og:updated_time" content="2018-09-25T13:39:43.729Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="arm平台的调用栈回溯(backtrace)">
-<meta name="twitter:description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
 
 
 
@@ -98,15 +85,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '5.1.4',
+    version: '',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -118,12 +103,37 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arm平台的调用栈回溯(backtrace)">
+<meta property="og:url" content="http://localhost/2018/09/19/Arm平台的调用栈回溯/index.html">
+<meta property="og:site_name" content="NyanNyan">
+<meta property="og:description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
+<meta property="og:image" content="http://localhost/images/stack.svg">
+<meta property="og:updated_time" content="2018-09-25T13:45:24.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="arm平台的调用栈回溯(backtrace)">
+<meta name="twitter:description" content="介绍arm平台的调用栈与x86平台的调用栈大致相同，稍微有些区别，主要在于栈帧的压栈内容和传参方式不同。在arm平台的不同程序，采用的编译选项不同，程序运行期间的栈帧也会不同。有些工具在对arm的调用栈回溯时，可能会遇到无法回溯的情况。例如gdb在使用bt查看core dump文件调用栈时，有时会出现Backtrace stoped的情况,有可能就是栈空间的压栈顺序导致的。当工具无法回溯时，就需要">
+
+
+
+
+
 
   <link rel="canonical" href="http://localhost/2018/09/19/Arm平台的调用栈回溯/"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>arm平台的调用栈回溯(backtrace) | NyanNyan</title>
   
@@ -134,6 +144,34 @@
 
 
 
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
 
@@ -153,19 +191,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">NyanNyan</span>
+        <span class="site-title"></span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -173,122 +209,90 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Trang Chủ</a>
+  </li>
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-resource">
-          <a href="/resource/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            资源
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />Giới Thiệu</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Thẻ</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Đầu Mục</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Lưu Trữ</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-resource">
+    <a href="/resource/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />resource</a>
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
 
-
-
-    </div>
   
 </nav>
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
+          
           <div id="content" class="content">
             
 
@@ -299,6 +303,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -323,25 +329,50 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">arm平台的调用栈回溯(backtrace)</h1>
+          <h1 class="post-title" itemprop="name headline">arm平台的调用栈回溯(backtrace)
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Tạo lúc</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T16:07:47+08:00">
-                2018-09-19
-              </time>
+
+              
+                
+              
+
+              <time title="Được tạo: 2018-09-19 16:07:47" itemprop="dateCreated datePublished" datetime="2018-09-19T16:07:47+08:00">2018-09-19</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Được thay đổi: 2018-09-25 21:45:24" itemprop="dateModified" datetime="2018-09-25T21:45:24+08:00">2018-09-25</time>
+              
             
           </span>
 
@@ -355,6 +386,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/09/19/Arm平台的调用栈回溯/#comments" itemprop="discussionUrl">
+                
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2018/09/19/Arm平台的调用栈回溯/" itemprop="commentCount"></span>
                 </a>
@@ -407,7 +439,7 @@
 <li>851c行将保存的ip减4，得到当前被调用函数的fp地址，即指向栈里的pc位置。</li>
 <li>8520行将sp减8，为栈空间开辟出8个字节的大小，用于存放局部便令。</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00008514 &#60;func1&#62;:&#10;     8514:   e1a0c00d    mov ip, sp&#10;     8518:   e92dd800    push    &#123;fp, ip, lr, pc&#125;&#10;     851c:   e24cb004    sub fp, ip, #4&#10;     8520:   e24dd008    sub sp, sp, #8&#10;     8524:   e3a03000    mov r3, #0&#10;     8528:   e50b3010    str r3, [fp, #-16]&#10;     852c:   e30805dc    movw    r0, #34268  ; 0x85dc&#10;     8530:   e3400000    movt    r0, #0&#10;     8534:   ebffff9d    bl  83b0 &#60;puts@plt&#62;&#10;     8538:   e51b3010    ldr r3, [fp, #-16]&#10;     853c:   e12fff33    blx r3&#10;     8540:   e3a03000    mov r3, #0&#10;     8544:   e1a00003    mov r0, r3&#10;     8548:   e24bd00c    sub sp, fp, #12&#10;     854c:   e89da800    ldm sp, &#123;fp, sp, pc&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00008514</span> &lt;func1&gt;:</span><br><span class="line">     <span class="number">8514</span>:   e1a0c00d    <span class="keyword">mov </span><span class="literal">ip</span>, <span class="literal">sp</span></span><br><span class="line">     <span class="number">8518</span>:   e92dd800    <span class="keyword">push </span>   &#123;<span class="literal">fp</span>, <span class="literal">ip</span>, <span class="literal">lr</span>, <span class="literal">pc</span>&#125;</span><br><span class="line">     <span class="number">851</span>c:   e24cb004    <span class="keyword">sub </span><span class="literal">fp</span>, <span class="literal">ip</span>, <span class="number">#4</span></span><br><span class="line">     <span class="number">8520</span>:   e24dd008    <span class="keyword">sub </span><span class="literal">sp</span>, <span class="literal">sp</span>, <span class="number">#8</span></span><br><span class="line">     <span class="number">8524</span>:   e3a03000    <span class="keyword">mov </span><span class="literal">r3</span>, <span class="number">#0</span></span><br><span class="line">     <span class="number">8528</span>:   e50b3010    <span class="keyword">str </span><span class="literal">r3</span>, [<span class="literal">fp</span>, #-<span class="number">16</span>]</span><br><span class="line">     <span class="number">852</span>c:   e30805dc    <span class="keyword">movw </span>   <span class="literal">r0</span>, <span class="number">#34268</span>  <span class="comment">; 0x85dc</span></span><br><span class="line">     <span class="number">8530</span>:   e3400000    <span class="keyword">movt </span>   <span class="literal">r0</span>, <span class="number">#0</span></span><br><span class="line">     <span class="number">8534</span>:   ebffff9d    <span class="keyword">bl </span> <span class="number">83</span>b0 &lt;puts<span class="comment">@plt&gt;</span></span><br><span class="line">     <span class="number">8538</span>:   e51b3010    <span class="keyword">ldr </span><span class="literal">r3</span>, [<span class="literal">fp</span>, #-<span class="number">16</span>]</span><br><span class="line">     <span class="number">853</span>c:   e12fff33    <span class="keyword">blx </span><span class="literal">r3</span></span><br><span class="line">     <span class="number">8540</span>:   e3a03000    <span class="keyword">mov </span><span class="literal">r3</span>, <span class="number">#0</span></span><br><span class="line">     <span class="number">8544</span>:   e1a00003    <span class="keyword">mov </span><span class="literal">r0</span>, <span class="literal">r3</span></span><br><span class="line">     <span class="number">8548</span>:   e24bd00c    <span class="keyword">sub </span><span class="literal">sp</span>, <span class="literal">fp</span>, <span class="number">#12</span></span><br><span class="line">     <span class="number">854</span>c:   e89da800    <span class="keyword">ldm </span><span class="literal">sp</span>, &#123;<span class="literal">fp</span>, <span class="literal">sp</span>, <span class="literal">pc</span>&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="-mapcs-frame编译选项">-mapcs-frame编译选项</h1><p>在第一节中，程序压栈的寄存器有{fp, ip, lr, pc} 4个，这是在gcc带有-mapcs-frame的编译选项下编译出来的。而gcc默认情况下的参数为mno-apcs-frame。关于该选项，gcc的手册描述为，</p>
 <blockquote>
 <p>Generate a stack frame that is compliant with the ARM Procedure Call Standard for all functions, even if this is not strictly necessary for correct execution of the code. Specifying -fomit-frame-pointer with this option causes the stack frames not to be generated for leaf functions. The default is -mno-apcs-frame. This option is deprecated.</p>
@@ -449,6 +481,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -498,17 +533,10 @@
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
-          
-
-
           
 
   
@@ -546,10 +574,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Mục Lục
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Tổng Quan
           </li>
         </ul>
       
@@ -562,42 +590,68 @@
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
-          <nav class="site-state motion-element">
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">bài viết</span>
+                  </a>
+                </div>
+              
 
-            
-              <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">mục</span>
+                  </a>
+                </div>
               
-                  <span class="site-state-item-count">21</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
 
-            
               
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">thẻ</span>
+                  </a>
+                </div>
               
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
+            </nav>
+          
 
           
 
@@ -623,6 +677,9 @@
             </div>
           
 
+          
+            
+          
           
 
         </div>
@@ -658,17 +715,21 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Aaron</span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
 
   
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+  <div class="powered-by">Cung cấp bởi <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.1.1</div>
 
 
 
@@ -676,12 +737,13 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">Giao Diện – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
 
 
 
 
         
+
 
 
 
@@ -701,7 +763,10 @@
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -720,7 +785,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -740,16 +809,6 @@
 
   
   
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -758,18 +817,13 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
 
 
 
@@ -777,392 +831,62 @@
   
 
 
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
 
 
 
   
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
 
 
 
   
 
 
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
   
 
-    
-      <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
-    
+  
+    <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
+  
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://localhost/2018/09/19/Arm平台的调用栈回溯/';
-          this.page.identifier = '2018/09/19/Arm平台的调用栈回溯/';
-          this.page.title = 'arm平台的调用栈回溯(backtrace)';
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://localhost/2018/09/19/Arm平台的调用栈回溯/';
+        this.page.identifier = '2018/09/19/Arm平台的调用栈回溯/';
+        this.page.title = 'arm平台的调用栈回溯(backtrace)';
         };
+      function loadComments () {
         var d = document, s = d.createElement('script');
         s.src = 'https://short-blog.disqus.com/embed.js';
         s.setAttribute('data-timestamp', '' + +new Date());
         (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
       }
-    });
-  </script>
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
@@ -1175,6 +899,12 @@
   
 
   
+
+  
+  
+
+  
+
   
 
   
