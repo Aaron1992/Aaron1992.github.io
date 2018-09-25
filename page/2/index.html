@@ -305,6 +305,284 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NyanNyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="url">Meteor使用现有的mongodb数据库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-01T11:26:30+08:00">
+                2015-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
+将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/#thêm" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://localhost/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NyanNyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" itemprop="url">字母转换大小写</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-01T09:04:20+08:00">
+                2015-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          在ASCII码中，大写字母A-Z的编码是41h-5Ah,小写字母a-z的编码是61h-8Ah,中间相差20h，用二进制表示就是0010 0000。所以当从大写转换成小写或者从小写转换到大写的时候只需改变一位即可。可以用位操作很快的实现。
+c语言示例代码1234567891011121314//小写转换成大写char upper(char input)&#123;      return input &amp; 0xdf;&#125;//大写转换成小写char lower(char input)&#123;      return input | 0x20 ;&#125;//大小写转换,大写变小写，小写变大写。char reverse(char input)&#123;      return input ^ 0x20;&#125;
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/01/zi-mu-zhuan-huan-da-xiao-xie/#thêm" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://localhost/2014/12/17/vim-tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,7 +686,7 @@ C 删除从光标位置到行尾的单词并进入编辑模式
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/17/vim-tutorial/#далее" rel="contents">
+            <a class="btn" href="/2014/12/17/vim-tutorial/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -550,7 +828,7 @@ C 删除从光标位置到行尾的单词并进入编辑模式
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#далее" rel="contents">
+            <a class="btn" href="/2014/12/09/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -703,7 +981,7 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/08/vim-xue-xi-bi-ji-1/#далее" rel="contents">
+            <a class="btn" href="/2014/12/08/vim-xue-xi-bi-ji-1/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -843,7 +1121,7 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/#далее" rel="contents">
+            <a class="btn" href="/2014/12/07/fen-xi-500pxde-apibing-qie-zhi-zuo-ge-pa-chong/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -991,7 +1269,7 @@ tips: d = delete = cut y = yank = copy
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/#далее" rel="contents">
+            <a class="btn" href="/2014/12/02/da-hua-tong-bu-yi-bu-zu-sai-fei-zu-sai/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1133,7 +1411,7 @@ curl -sL https://deb.nodesource.com/setup | bash -
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/#далее" rel="contents">
+            <a class="btn" href="/2014/12/02/ghost-blogan-zhuang-xiang-xi-guo-cheng/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1274,7 +1552,7 @@ curl -sL https://deb.nodesource.com/setup | bash -
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/#далее" rel="contents">
+            <a class="btn" href="/2014/11/28/ubuntu-an-zhuang-ssh-serverbing-qie-yun-xu-rootdeng-lu/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1438,149 +1716,7 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#далее" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://localhost/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aaron">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NyanNyan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/" itemprop="url">电信服务商屏蔽digitalocean新加坡ip</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-11-28T22:17:05+08:00">
-                2014-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          　　因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方ping都不会产生如此高的丢包。
-　　室友说是GFW的问题。我觉得很认同。
-　　晚上的时候，我突然想到换个网络通出口，我平时一直用的是电信出口。我将网络通出口换成了移动出口，这一次，ssh连接成功了。延迟很低。就像在本地一样。但是如果用移动出口，访问国内网站又会效果不好。我这一次换成了教育网出口。显而易见，也是非常的通畅。把shadowsocks本地的配置更改了一下，浏览器代理加了规则list:http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。 今天完工。
-　　该死的电信防火墙。
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/#далее" rel="contents">
+            <a class="btn" href="/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#thêm" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1622,7 +1758,7 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1668,7 +1804,7 @@ bool QueensLv(int try[]){   //LV算法解决N皇后问题
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
