@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,25 +108,17 @@
 
 
 
-  <meta name="description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。
-搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接
-安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。
-设置hexo">
+  <meta name="description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。 搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接 安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。 设置hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo博客一键式部署到服务器">
 <meta property="og:url" content="http://localhost/2018/02/04/gogs和git-hook实现hex博客一键式部署/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。
-搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接
-安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。
-设置hexo">
+<meta property="og:description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。 搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接 安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。 设置hexo">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-02-04T16:49:01.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo博客一键式部署到服务器">
-<meta name="twitter:description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。
-搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接
-安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。
-设置hexo">
+<meta name="twitter:description" content="hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过hexo d命令将public目录推送到git服务器，并触发部署代码到网站目录。 搭建git服务器git服务器可以选择gitlab或者gogs, 本文选择gogs。gogs安装链接 安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。 设置hexo">
 
 
 
@@ -201,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -425,14 +417,14 @@
 
       
         <p>hexo博客部署到服务器可以使用git和rsync方法，本文首先接受git方式。通过<code>hexo d</code>命令将public目录推送到git服务器，并触发部署代码到网站目录。</p>
-<h1 id="搭建git服务器">搭建git服务器</h1><p>git服务器可以选择gitlab或者gogs, 本文选择gogs。<br><a href="/2018/02/02/create-git-service-with-gog/">gogs安装链接</a></p>
+<h1 id="搭建git服务器"><a href="#搭建git服务器" class="headerlink" title="搭建git服务器"></a>搭建git服务器</h1><p>git服务器可以选择gitlab或者gogs, 本文选择gogs。<br><a href="/2018/02/02/create-git-service-with-gog/">gogs安装链接</a></p>
 <p>安装完gogs服务器后，配置好git网站git.example.com，并创建博客文件仓库,例如blog_public。</p>
-<h1 id="设置hexo的git同步方式">设置hexo的git同步方式</h1><p>在hexo的_config.yml文件中, 配置如下的git部署信息，其中repo字段可以在gogs网页上创建仓库后的页面找到。配置完以后，在本地运行<code>hexo d</code>会将public目录推送到git服务器。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;ssh_name&gt;@git<span class="class">.gitserver</span>:&lt;account&gt;/blog_public<span class="class">.git</span></span><br><span class="line">  branch: master</span><br><span class="line">  message: update blog</span><br></pre></td></tr></table></figure>
-<h1 id="创建服务器git仓库">创建服务器git仓库</h1><p>为了在服务器上访问blog_public仓库的文件，还需要在服务器的网站目录添加git本地仓库，用来存储生成的网站文件。这个文件夹同时也是网站的目录，通过配置nginx，完成对该目录的访问。</p>
+<h1 id="设置hexo的git同步方式"><a href="#设置hexo的git同步方式" class="headerlink" title="设置hexo的git同步方式"></a>设置hexo的git同步方式</h1><p>在hexo的_config.yml文件中, 配置如下的git部署信息，其中repo字段可以在gogs网页上创建仓库后的页面找到。配置完以后，在本地运行<code>hexo d</code>会将public目录推送到git服务器。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repo:</span> <span class="params">&lt;ssh_name&gt;</span>@git.gitserver:<span class="params">&lt;account&gt;</span>/blog_public.git</span><br><span class="line"><span class="symbol">  branch:</span> master</span><br><span class="line"><span class="symbol">  message:</span> update blog</span><br></pre></td></tr></table></figure>
+<h1 id="创建服务器git仓库"><a href="#创建服务器git仓库" class="headerlink" title="创建服务器git仓库"></a>创建服务器git仓库</h1><p>为了在服务器上访问blog_public仓库的文件，还需要在服务器的网站目录添加git本地仓库，用来存储生成的网站文件。这个文件夹同时也是网站的目录，通过配置nginx，完成对该目录的访问。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/www/blog_public</span><br><span class="line"><span class="built_in">cd</span> /var/www/blog_public</span><br><span class="line">git init</span><br><span class="line">git <span class="built_in">clone</span> ~/repos/test.git</span><br></pre></td></tr></table></figure>
-<h1 id="使用githook实现自动部署">使用githook实现自动部署</h1><p>进入到<pathtogogs>/gogs-repositories/<account>/blog_public.git/hooks文件夹，使用vi post-receive创建一个脚本，当你在本地仓库执行git push后就会触发post-receive（<a href="https://git-scm.com/book/zh/v1/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git%E6%8C%82%E9%92%A9" target="_blank" rel="external">关于Git Hok</a>）。<br>post-receive的内容</account></pathtogogs></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/env bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR</span><br><span class="line">NowPath=`<span class="built_in">pwd</span>`</span><br><span class="line"><span class="comment">#部署路径为网站服务器设置的文件目录</span></span><br><span class="line">DeployPath=<span class="string">"/var/www/blog_public"</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DeployPath</span></span><br><span class="line">git pull origin master</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$NowPath</span></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h1 id="使用githook实现自动部署"><a href="#使用githook实现自动部署" class="headerlink" title="使用githook实现自动部署"></a>使用githook实现自动部署</h1><p>进入到<pathtogogs>/gogs-repositories/<account>/blog_public.git/hooks文件夹，使用vi post-receive创建一个脚本，当你在本地仓库执行git push后就会触发post-receive（<a href="https://git-scm.com/book/zh/v1/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git%E6%8C%82%E9%92%A9" target="_blank" rel="noopener">关于Git Hok</a>）。<br>post-receive的内容</account></pathtogogs></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">unset</span> GIT_DIR</span><br><span class="line">NowPath=`<span class="built_in">pwd</span>`</span><br><span class="line"><span class="comment">#部署路径为网站服务器设置的文件目录</span></span><br><span class="line">DeployPath=<span class="string">"/var/www/blog_public"</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DeployPath</span></span><br><span class="line">git pull origin master</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$NowPath</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
 <p>之后在本地使用git deploy命令触发提交后，会自动以上脚本，实现自动部署。</p>
 
       
@@ -461,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/04/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/02/04/appleid切换美区/" rel="next" title="appleid切换美区">
+                <i class="fa fa-chevron-left"></i> appleid切换美区
               </a>
             
           </div>
@@ -675,7 +667,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -685,7 +677,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -693,7 +685,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

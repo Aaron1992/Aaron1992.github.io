@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,52 +108,19 @@
 
 
 
-  <meta name="description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
+  <meta name="description" content="#include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdlib.h&amp;gt; #include&amp;lt;time.h&amp;gt;  #define bool int #define true 1 #define false 0  #define DIM 50   int uniform(int n){   //random function     double r;     if(">
+<meta name="keywords" content="
+- 随机算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Las Vegas随机算法求N皇后问题的解">
 <meta property="og:url" content="http://localhost/2014/11/28/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
+<meta property="og:description" content="#include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdlib.h&amp;gt; #include&amp;lt;time.h&amp;gt;  #define bool int #define true 1 #define false 0  #define DIM 50   int uniform(int n){   //random function     double r;     if(">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2014-11-28T15:04:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Las Vegas随机算法求N皇后问题的解">
-<meta name="twitter:description" content="#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
-#include&amp;lt;time.h&amp;gt;
-
-#define bool int
-#define true 1
-#define false 0
-
-#define DIM 50 
-
-int uniform(int n){   //random function
-    double r;
-    if(">
+<meta name="twitter:description" content="#include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdlib.h&amp;gt; #include&amp;lt;time.h&amp;gt;  #define bool int #define true 1 #define false 0  #define DIM 50   int uniform(int n){   //random function     double r;     if(">
 
 
 
@@ -228,7 +195,7 @@ int uniform(int n){   //random function
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -439,88 +406,88 @@ int uniform(int n){   //random function
       
 
       
-        <pre><code><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span>
-<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span>
-<span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;time.h&gt;</span></span>
+        <pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;time.h&gt;
 
-<span class="preprocessor">#<span class="keyword">define</span> bool int</span>
-<span class="preprocessor">#<span class="keyword">define</span> true <span class="number">1</span></span>
-<span class="preprocessor">#<span class="keyword">define</span> false <span class="number">0</span></span>
+#define bool int
+#define true 1
+#define false 0
 
-<span class="preprocessor">#<span class="keyword">define</span> DIM <span class="number">50</span> </span>
+#define DIM 50 
 
-<span class="function"><span class="keyword">int</span> <span class="title">uniform</span><span class="params">(<span class="keyword">int</span> n)</span></span>{   <span class="comment">//random function</span>
-    <span class="keyword">double</span> r;
-    <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)
-    <span class="keyword">return</span> -<span class="number">1</span>;
+int uniform(int n){   //random function
+    double r;
+    if(n&lt;=0)
+    return -1;
     r=rand();
-    <span class="keyword">return</span> (<span class="keyword">int</span>)(r/RAND_MAX*(n-<span class="number">1</span>))+<span class="number">1</span>;
+    return (int)(r/RAND_MAX*(n-1))+1;
 }
 
-<span class="function"><span class="keyword">bool</span> <span class="title">QueensLv</span><span class="params">(<span class="keyword">int</span> <span class="keyword">try</span>[])</span></span>{   <span class="comment">//LV算法解决N皇后问题</span>
-    <span class="keyword">int</span> index,nb;
-    <span class="keyword">int</span> col,randcol;
-    <span class="keyword">bool</span> conflict=<span class="literal">false</span>;
-    <span class="keyword">int</span> row=<span class="number">0</span>;
-    <span class="keyword">bool</span> success=<span class="literal">false</span>;
+bool QueensLv(int try[]){   //LV算法解决N皇后问题
+    int index,nb;
+    int col,randcol;
+    bool conflict=false;
+    int row=0;
+    bool success=false;
 
-    <span class="keyword">do</span> {   <span class="comment">//从第一行开始</span>
-        nb=<span class="number">0</span>;    <span class="comment">////计数器，nb值为（row)th皇后的open位置总数</span>
-        <span class="keyword">for</span>(col=<span class="number">0</span>;col&lt;DIM;col++){   <span class="comment">//从第一列开始</span>
-            conflict = <span class="literal">false</span>;
-            <span class="keyword">for</span>(index=<span class="number">0</span>;index&lt;row;index++){
-                <span class="keyword">if</span>(<span class="keyword">try</span>[index]==col||<span class="built_in">abs</span>(col-<span class="keyword">try</span>[index])==(row-index))   <span class="comment">//测试(row,col)是否冲突</span>
-                conflict=<span class="literal">true</span>;
+    do {   //从第一行开始
+        nb=0;    ////计数器，nb值为（row)th皇后的open位置总数
+        for(col=0;col&lt;DIM;col++){   //从第一列开始
+            conflict = false;
+            for(index=0;index&lt;row;index++){
+                if(try[index]==col||abs(col-try[index])==(row-index))   //测试(row,col)是否冲突
+                conflict=true;
             }
-            <span class="keyword">if</span>(conflict==<span class="literal">false</span>){   <span class="comment">//是安全的</span>
-                nb=nb+<span class="number">1</span>;
-                <span class="keyword">if</span>(uniform(nb)==<span class="number">1</span>)  <span class="comment">//或许放在第col列</span>
-                    randcol=col;   <span class="comment">//注意第一次uniform一定返回1，即j一定有值</span>
-            }  <span class="comment">//endif</span>
-        } <span class="comment">//enddo,</span>
+            if(conflict==false){   //是安全的
+                nb=nb+1;
+                if(uniform(nb)==1)  //或许放在第col列
+                    randcol=col;   //注意第一次uniform一定返回1，即j一定有值
+            }  //endif
+        } //enddo,
 
-        <span class="keyword">if</span>(nb &gt;<span class="number">0</span> ){   <span class="comment">//nb=0时无安全位置，第row皇后尚未放好</span>
-                    <span class="comment">//在所有nb个安全位置上，(row)th皇后选择位置j的概率为1/nb</span>
-            <span class="keyword">try</span>[row] = randcol;
+        if(nb &gt;0 ){   //nb=0时无安全位置，第row皇后尚未放好
+                    //在所有nb个安全位置上，(row)th皇后选择位置j的概率为1/nb
+            try[row] = randcol;
         }
         row++;
-    }<span class="keyword">while</span>(nb != <span class="number">0</span>&amp;&amp;row &lt; DIM); <span class="comment">//当前皇后找不到合适的位置或try是</span>
-                               <span class="comment">// DIM-promising时结束.</span>
-    <span class="keyword">if</span>(nb &gt; <span class="number">0</span>)
-        success = <span class="literal">true</span>;
-    <span class="keyword">else</span> 
-        success = <span class="literal">false</span>;
-    <span class="keyword">return</span> success;
+    }while(nb != 0&amp;&amp;row &lt; DIM); //当前皇后找不到合适的位置或try是
+                               // DIM-promising时结束.
+    if(nb &gt; 0)
+        success = true;
+    else 
+        success = false;
+    return success;
 }
 
-<span class="function"><span class="keyword">int</span> <span class="title">SovleQueen</span><span class="params">()</span></span>{   <span class="comment">//不断调用LV算法直至成功</span>
-    <span class="keyword">bool</span> success;
-    <span class="keyword">int</span> chess[DIM];
-    <span class="keyword">int</span> row;
-    <span class="keyword">int</span> i;
-    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;DIM;i++)chess[i]=-<span class="number">1</span>;
-    <span class="keyword">do</span>{
+int SovleQueen(){   //不断调用LV算法直至成功
+    bool success;
+    int chess[DIM];
+    int row;
+    int i;
+    for(i=0;i&lt;DIM;i++)chess[i]=-1;
+    do{
         success = QueensLv(chess);
-    }<span class="keyword">while</span>(success!=<span class="literal">true</span>);
-    <span class="keyword">for</span>(row = <span class="number">0</span>;row&lt;DIM;row++){
-        <span class="comment">//printf("%d ",chess[row]);</span>
-        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; chess[row]; i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
-        <span class="built_in">printf</span>(<span class="string">"X"</span>);
-        <span class="keyword">for</span>(i=chess[row]+<span class="number">1</span>;i&lt;DIM;i++)<span class="built_in">printf</span>(<span class="string">"."</span>);
-        <span class="built_in">printf</span>(<span class="string">"\n"</span>);
+    }while(success!=true);
+    for(row = 0;row&lt;DIM;row++){
+        //printf(&quot;%d &quot;,chess[row]);
+        for(i = 0; i &lt; chess[row]; i++)printf(&quot;.&quot;);
+        printf(&quot;X&quot;);
+        for(i=chess[row]+1;i&lt;DIM;i++)printf(&quot;.&quot;);
+        printf(&quot;\n&quot;);
     }
 }
 
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>{
-    <span class="keyword">int</span> index,j;
-    <span class="keyword">clock_t</span> start,end;
-    <span class="keyword">double</span> dur;
-    srand(time(<span class="number">0</span>));
+int main(int argc,char **argv){
+    int index,j;
+    clock_t start,end;
+    double dur;
+    srand(time(0));
     start = clock();
     SovleQueen();
     end = clock();
-    dur = <span class="number">1000.0</span>*(end-start)/CLOCKS_PER_SEC;
-    <span class="built_in">printf</span>(<span class="string">"used: %f ms.\n"</span>,dur);
+    dur = 1000.0*(end-start)/CLOCKS_PER_SEC;
+    printf(&quot;used: %f ms.\n&quot;,dur);
 
 }
 </code></pre>
@@ -746,7 +713,7 @@ int uniform(int n){   //random function
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -756,7 +723,7 @@ int uniform(int n){   //random function
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -764,7 +731,7 @@ int uniform(int n){   //random function
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

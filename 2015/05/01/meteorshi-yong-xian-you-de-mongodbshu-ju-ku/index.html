@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,19 +108,17 @@
 
 
 
-  <meta name="description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
-将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
+  <meta name="description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db 将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Meteor使用现有的mongodb数据库">
 <meta property="og:url" content="http://localhost/2015/05/01/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
-将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
+<meta property="og:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db 将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2015-05-01T03:29:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Meteor使用现有的mongodb数据库">
-<meta name="twitter:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db
-将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
+<meta name="twitter:description" content="meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。1export MONGO_URL=mongodb://localhost:27017/your_db 将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。">
 
 
 
@@ -195,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -406,7 +404,7 @@
       
 
       
-        <p>meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> MONGO_URL=mongodb:<span class="comment">//localhost:27017/your_db</span></span><br></pre></td></tr></table></figure></p>
+        <p>meteor使用环境变量MONGO_URL确定mongodb的位置。如果已经存在一个监听在27017端口上的mongdb，则可以使用下边的一句话使用现有的mongodb。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">MONGO_URL</span>=mongodb://localhost:27017/your_db</span><br></pre></td></tr></table></figure></p>
 <p>将其中的your_db替换成你要使用的数据库。每次重开一个终端或主机重启的时候，环境变量会还原，需要重新导入。</p>
 
       
@@ -624,7 +622,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -634,7 +632,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -642,7 +640,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

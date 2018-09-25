@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,19 +108,20 @@
 
 
 
-  <meta name="description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
+  <meta name="description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。 　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方p">
+<meta name="keywords" content="
+- vps
+- digitalocean">
 <meta property="og:type" content="article">
 <meta property="og:title" content="电信服务商屏蔽digitalocean新加坡ip">
 <meta property="og:url" content="http://localhost/2014/11/28/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
+<meta property="og:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。 　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方p">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2014-11-28T14:22:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="电信服务商屏蔽digitalocean新加坡ip">
-<meta name="twitter:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。
-　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方pin">
+<meta name="twitter:description" content="因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。 　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方p">
 
 
 
@@ -195,7 +196,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -409,7 +410,7 @@
         <p>　　因为最近在旧金山的digitalocean上的vps访问起来ping值越来越高，平均都在200以上了，所以今天想把droplet转移到新加坡机房。转移过后问题出现了。丢包特别严重平均50%。而且到后来ssh都无法连接成功。</p>
 <p>　　给support提交了ticket，他们让我们traceroute和ping ，把结果给他们看。最后客服给回复后，他Ping我的Ip也是很高的丢包，但是给其他任何地方ping都不会产生如此高的丢包。</p>
 <p>　　室友说是GFW的问题。我觉得很认同。</p>
-<p>　　晚上的时候，我突然想到换个网络通出口，我平时一直用的是电信出口。我将网络通出口换成了移动出口，这一次，ssh连接成功了。延迟很低。就像在本地一样。但是如果用移动出口，访问国内网站又会效果不好。我这一次换成了教育网出口。显而易见，也是非常的通畅。把shadowsocks本地的配置更改了一下，浏览器代理加了规则list:<a href="http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。" target="_blank" rel="external">http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。</a> 今天完工。</p>
+<p>　　晚上的时候，我突然想到换个网络通出口，我平时一直用的是电信出口。我将网络通出口换成了移动出口，这一次，ssh连接成功了。延迟很低。就像在本地一样。但是如果用移动出口，访问国内网站又会效果不好。我这一次换成了教育网出口。显而易见，也是非常的通畅。把shadowsocks本地的配置更改了一下，浏览器代理加了规则list:<a href="http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。" target="_blank" rel="noopener">http://autoproxy-gfwlist.googlecode.com/svn/trunk/gfwlist.txt。</a> 今天完工。</p>
 <p>　　该死的电信防火墙。</p>
 
       
@@ -631,7 +632,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -641,7 +642,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -649,7 +650,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

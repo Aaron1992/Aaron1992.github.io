@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,40 +108,19 @@
 
 
 
-  <meta name="description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
-
-复制和粘贴剪切（复制）和粘贴  
-
-将光标移动到剪切的开头部分
-按v开始选择字符（按住V选择整行）
-将光标移动到希望剪切部分的尾部。
-按d剪切（按y复制）
-移动到希望粘贴的地方">
+  <meta name="description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。  复制和粘贴剪切（复制）和粘贴    将光标移动到剪切的开头部分 按v开始选择字符（按住V选择整行） 将光标移动到希望剪切部分的尾部。 按d剪切（按y复制） 移动到希望粘贴的地方">
+<meta name="keywords" content="
+- vim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vim 学习笔记-复制和粘贴">
 <meta property="og:url" content="http://localhost/2014/12/08/vim-xue-xi-bi-ji-1/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
-
-复制和粘贴剪切（复制）和粘贴  
-
-将光标移动到剪切的开头部分
-按v开始选择字符（按住V选择整行）
-将光标移动到希望剪切部分的尾部。
-按d剪切（按y复制）
-移动到希望粘贴的地方">
+<meta property="og:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。  复制和粘贴剪切（复制）和粘贴    将光标移动到剪切的开头部分 按v开始选择字符（按住V选择整行） 将光标移动到希望剪切部分的尾部。 按d剪切（按y复制） 移动到希望粘贴的地方">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2014-12-17T00:32:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim 学习笔记-复制和粘贴">
-<meta name="twitter:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。
-
-复制和粘贴剪切（复制）和粘贴  
-
-将光标移动到剪切的开头部分
-按v开始选择字符（按住V选择整行）
-将光标移动到希望剪切部分的尾部。
-按d剪切（按y复制）
-移动到希望粘贴的地方">
+<meta name="twitter:description" content="最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。  复制和粘贴剪切（复制）和粘贴    将光标移动到剪切的开头部分 按v开始选择字符（按住V选择整行） 将光标移动到希望剪切部分的尾部。 按d剪切（按y复制） 移动到希望粘贴的地方">
 
 
 
@@ -216,7 +195,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -441,7 +420,7 @@
       
         <p>最近随着在linux下工作的时间越来越多，Vim的使用次数也越来在越多。以前曾经掌握的基本操作本来就不多，后来又忘掉了很多，现在越来越感觉会的快捷键不够用了，导致编辑效率不高。所以现在每天花点时间重新学些Vim的东西吧。</p>
 <hr>
-<h3 id="复制和粘贴">复制和粘贴</h3><p><strong>剪切（复制）和粘贴</strong>  </p>
+<h3 id="复制和粘贴"><a href="#复制和粘贴" class="headerlink" title="复制和粘贴"></a>复制和粘贴</h3><p><strong>剪切（复制）和粘贴</strong>  </p>
 <ol>
 <li>将光标移动到剪切的开头部分</li>
 <li>按<strong>v</strong>开始选择字符（按住<strong>V</strong>选择整行）</li>
@@ -452,11 +431,11 @@
 </ol>
 <blockquote>
 <p><em>tips:</em><br> <strong>d</strong> = delete = cut<br> <strong>y</strong> = yank = copy</p>
+</blockquote>
 <hr>
-<h3 id="多段粘贴">多段粘贴</h3></blockquote>
-<p>当删除或者复制一段文字的时候，这段文字被保存在Vim的未命名寄存器中。Vim中还可以使用用单个字母标记的命名寄存器。用一个双引号加一个字母指定要使用的寄存器。  </p>
+<h3 id="多段粘贴"><a href="#多段粘贴" class="headerlink" title="多段粘贴"></a>多段粘贴</h3><p>当删除或者复制一段文字的时候，这段文字被保存在Vim的未命名寄存器中。Vim中还可以使用用单个字母标记的命名寄存器。用一个双引号加一个字母指定要使用的寄存器。  </p>
 <p>例如，选择==hello==后，按==”ay==将”hello”保存到==a==寄存器，然后选择==world==,按==”by==保存到==b==寄存器。当要粘贴的时候，分别使用==”ap==和==”bp==粘贴”hello”和”world”。当然也可以使用==”aP==和==”bP==来粘贴到光标之前。</p>
-<h4 id="在不同Vim窗口（或终端）中粘贴">在不同Vim窗口（或终端）中粘贴</h4><p>在复制文本后，为了复制到另一个文件，先打开一个缓冲区：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:e</span> ~<span class="regexp">/dummy</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="在不同Vim窗口（或终端）中粘贴"><a href="#在不同Vim窗口（或终端）中粘贴" class="headerlink" title="在不同Vim窗口（或终端）中粘贴"></a>在不同Vim窗口（或终端）中粘贴</h4><p>在复制文本后，为了复制到另一个文件，先打开一个缓冲区：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:e</span> ~<span class="regexp">/dummy</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>将文本粘贴到缓冲区</li>
 <li>保存缓冲区的内容(:w)</li>
@@ -466,7 +445,7 @@
 <li>读取dummy文件(:r ~/dummy)  </li>
 </ul>
 <hr>
-<h3 id="增加缓冲区大小">增加缓冲区大小</h3><p>在Vim中有时候最多只能复制50行。可以通过增加缓存区大小来解除这个限制：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:<span class="operator"><span class="keyword">help</span> <span class="string">'viminfo'</span></span><br><span class="line">...</span><br><span class="line">&lt;       Maximum <span class="built_in">number</span> <span class="keyword">of</span> <span class="keyword">lines</span> saved <span class="keyword">for</span> <span class="keyword">each</span> <span class="keyword">register</span>.</span><br><span class="line">...</span><br><span class="line">:<span class="keyword">set</span> viminfo?</span><br><span class="line">:<span class="keyword">set</span> viminfo=<span class="string">'100,&lt;100,s10,h</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="增加缓冲区大小"><a href="#增加缓冲区大小" class="headerlink" title="增加缓冲区大小"></a>增加缓冲区大小</h3><p>在Vim中有时候最多只能复制50行。可以通过增加缓存区大小来解除这个限制：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">help</span> <span class="string">'viminfo'</span></span><br><span class="line">...</span><br><span class="line">&lt;       Maximum <span class="built_in">number</span> <span class="keyword">of</span> <span class="keyword">lines</span> saved <span class="keyword">for</span> <span class="keyword">each</span> register.</span><br><span class="line">...</span><br><span class="line">:<span class="keyword">set</span> viminfo?</span><br><span class="line">:<span class="keyword">set</span> viminfo=<span class="string">'100,&lt;100,s10,h</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -715,7 +694,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -725,7 +704,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -733,7 +712,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

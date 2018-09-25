@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,25 +108,17 @@
 
 
 
-  <meta name="description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）
-编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：
-
-i 在光">
+  <meta name="description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!） 编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：  i 在光">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vim tutorial">
 <meta property="og:url" content="http://localhost/2014/12/17/vim-tutorial/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）
-编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：
-
-i 在光">
+<meta property="og:description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!） 编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：  i 在光">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2014-12-17T00:30:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim tutorial">
-<meta name="twitter:description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）
-编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：
-
-i 在光">
+<meta name="twitter:description" content="写在前边请忽略任何将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!） 编辑Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：  i 在光">
 
 
 
@@ -201,7 +193,7 @@ i 在光">
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -413,7 +405,7 @@ i 在光">
 
       
         <p><em>写在前边</em><br>请忽略<strong>任何</strong>将VIM配置成类似Notepad编辑器的建议（Please ignore anyone who provides advice on how to configure Vim to operate like Notepad!）</p>
-<h4 id="编辑">编辑</h4><p>Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：</p>
+<h4 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h4><p>Vim中有Normal(普通)，Insert（编辑）和Visual（视图），在Insert模式下进行编辑。从普通模式进入编辑模式的快捷键：</p>
 <ul>
 <li>i 在光标当前位置插入</li>
 <li>a 在光标当前位置之后插入</li>
@@ -427,7 +419,7 @@ i 在光">
 <li>cc 同S (change line)</li>
 <li>C 删除从光标位置到行尾的单词并进入编辑模式</li>
 </ul>
-<h4 id="保存并退出">保存并退出</h4><p>在普通模式下使用 <code>:q</code>退出不保存，<code>:w</code>保存，<code>:w &lt;filename&gt;</code>保存问<filenmae>,<code>:wq</code>或<code>:x</code>保存并退出</filenmae></p>
+<h4 id="保存并退出"><a href="#保存并退出" class="headerlink" title="保存并退出"></a>保存并退出</h4><p>在普通模式下使用 <code>:q</code>退出不保存，<code>:w</code>保存，<code>:w &lt;filename&gt;</code>保存问<filenmae>,<code>:wq</code>或<code>:x</code>保存并退出</filenmae></p>
 <ul>
 <li>:wa    write all changed files (save all changes)</li>
 <li>:xa    exit all (save all changes and close Vim)</li>
@@ -437,7 +429,7 @@ i 在光">
 <hr>
 <p><em>reference:</em></p>
 <ul>
-<li><a href="http://vim.wikia.com/wiki/Tutorial" target="_blank" rel="external">http://vim.wikia.com/wiki/Tutorial</a></li>
+<li><a href="http://vim.wikia.com/wiki/Tutorial" target="_blank" rel="noopener">http://vim.wikia.com/wiki/Tutorial</a></li>
 </ul>
 
       
@@ -680,7 +672,7 @@ i 在光">
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -690,7 +682,7 @@ i 在光">
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -698,7 +690,7 @@ i 在光">
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

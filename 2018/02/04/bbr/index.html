@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -114,6 +114,7 @@
 <meta property="og:url" content="http://localhost/2018/02/04/bbr/index.html">
 <meta property="og:site_name" content="NyanNyan">
 <meta property="og:description" content="BBR (Bottleneck Bandwidth and RTT) is a new congestion control algorithm which is contributed to the Linux kernel TCP stack by Google. With BBR in place, a Linux server can get significantly increased">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-02-04T08:38:29.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7启用BBR">
@@ -192,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -405,20 +406,20 @@
       
         <p>BBR (Bottleneck Bandwidth and RTT) is a new congestion control algorithm which is contributed to the Linux kernel TCP stack by Google. With BBR in place, a Linux server can get significantly increased throughput and reduced latency for connections. Besides, it’s easy to deploy BBR because this algorithm requires only updates on the sender side, not in the network or on the receiver side.</p>
 <p>In this article, I will show you how to deploy BBR on a Vultr CentOS 7 KVM server instance.</p>
-<h2 id="Prerequisites">Prerequisites</h2><ul>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><ul>
 <li>A Vultr CentOS 7 x64 server instance.</li>
 <li>A sudo user.</li>
 </ul>
-<h2 id="Step_1:_Upgrade_the_kernel_using_the_ELRepo_RPM_repository">Step 1: Upgrade the kernel using the ELRepo RPM repository</h2><p>In order to use BBR, you need to upgrade the kernel of your CentOS 7 machine to 4.9.0. You can easily get that done using the ELRepo RPM repository.</p>
+<h2 id="Step-1-Upgrade-the-kernel-using-the-ELRepo-RPM-repository"><a href="#Step-1-Upgrade-the-kernel-using-the-ELRepo-RPM-repository" class="headerlink" title="Step 1: Upgrade the kernel using the ELRepo RPM repository"></a>Step 1: Upgrade the kernel using the ELRepo RPM repository</h2><p>In order to use BBR, you need to upgrade the kernel of your CentOS 7 machine to 4.9.0. You can easily get that done using the ELRepo RPM repository.</p>
 <p>Before the upgrade, you can take a look at the current kernel:</p>
 <p>uname -r<br>This command should output a string which resembles:</p>
 <p>3.10.0-514.2.2.el7.x86_64<br>As you see, the current kernel is 3.10.0.</p>
 <p>Install the ELRepo repo:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span><br><span class="line">sudo rpm -Uvh http://www.elrepo.org/elrepo-release-<span class="number">7.0</span>-<span class="number">2</span>.el7.elrepo.noarch.rpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span><br><span class="line">sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm</span><br></pre></td></tr></table></figure>
 <p>Install the 4.9.0 kernel using the ELRepo repo:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum --enablerepo=elrepo-kernel install kernel-ml -y</span><br></pre></td></tr></table></figure>
 <p>Confirm the result:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kernel</span><br><span class="line">If the installation is successful, you should see kernel-ml-<span class="number">4.9</span>.<span class="number">0</span>-<span class="number">1</span>.el7.elrepo.x86_64 among the output list:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kernel-ml-<span class="number">4.9</span>.<span class="number">0</span>-<span class="number">1</span>.el7.elrepo.x86_64</span><br><span class="line">kernel-<span class="number">3.10</span>.<span class="number">0</span>-<span class="number">514</span>.el7.x86_64</span><br><span class="line">kernel-tools-libs-<span class="number">3.10</span>.<span class="number">0</span>-<span class="number">514.2</span>.<span class="number">2</span>.el7.x86_64</span><br><span class="line">kernel-tools-<span class="number">3.10</span>.<span class="number">0</span>-<span class="number">514.2</span>.<span class="number">2</span>.el7.x86_64</span><br><span class="line">kernel-<span class="number">3.10</span>.<span class="number">0</span>-<span class="number">514.2</span>.<span class="number">2</span>.el7.x86_64</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kernel</span><br><span class="line">If the installation is successful, you should see kernel-ml-4.9.0-1.el7.elrepo.x86_64 among the output list:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kernel-ml-4.9.0-1.el7.elrepo.x86_64</span><br><span class="line">kernel-3.10.0-514.el7.x86_64</span><br><span class="line">kernel-tools-libs-3.10.0-514.2.2.el7.x86_64</span><br><span class="line">kernel-tools-3.10.0-514.2.2.el7.x86_64</span><br><span class="line">kernel-3.10.0-514.2.2.el7.x86_64</span><br></pre></td></tr></table></figure>
 <p>Now, you need to enable the 4.9.0 kernel by setting up the default grub2 boot entry.</p>
 <p>Show all entries in the grub2 menu:</p>
 <p>sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \’<br>The result should resemble:</p>
@@ -427,7 +428,7 @@
 <p>sudo shutdown -r now<br>When the server is back online, log back in and rerun the uname command to confirm that you are using the correct Kernel:</p>
 <p>uname -r<br>You should see the result as below:</p>
 <p>4.9.0-1.el7.elrepo.x86_64</p>
-<h2 id="Step_2:_Enable_BBR">Step 2: Enable BBR</h2><p>In order to enable the BBR algorithm, you need to modify the sysctl configuration as follows:</p>
+<h2 id="Step-2-Enable-BBR"><a href="#Step-2-Enable-BBR" class="headerlink" title="Step 2: Enable BBR"></a>Step 2: Enable BBR</h2><p>In order to enable the BBR algorithm, you need to modify the sysctl configuration as follows:</p>
 <p>echo ‘net.core.default_qdisc=fq’ | sudo tee -a /etc/sysctl.conf<br>echo ‘net.ipv4.tcp_congestion_control=bbr’ | sudo tee -a /etc/sysctl.conf<br>sudo sysctl -p<br>Now, you can use the following commands to confirm that BBR is enabled:</p>
 <p>sudo sysctl net.ipv4.tcp_available_congestion_control<br>The output should resemble:</p>
 <p>net.ipv4.tcp_available_congestion_control = bbr cubic reno<br>Next, verify with:</p>
@@ -435,9 +436,9 @@
 <p>bbr<br>Finally, check that the kernel module was loaded:</p>
 <p>lsmod | grep bbr<br>The output will be similar to:</p>
 <p>tcp_bbr                16384  0</p>
-<h2 id="Step_3_(optional):_Test_the_network_performance_enhancement">Step 3 (optional): Test the network performance enhancement</h2><p>In order to test BBR’s network performance enhancement, you can create a file in the web server directory for download, and then test the download speed from a web browser on your desktop machine.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install httpd -y</span><br><span class="line">sudo systemctl start httpd.service</span><br><span class="line">sudo firewall-cmd --zone=public --permanent --add-service=http</span><br><span class="line">sudo firewall-cmd --reload</span><br><span class="line"><span class="built_in">cd</span> /var/www/html</span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=<span class="number">500</span>mb.zip bs=<span class="number">1024</span>k count=<span class="number">500</span></span><br></pre></td></tr></table></figure>
-<p>Finally, visit the URL <a href="http://[your-server-IP]/500mb.zip" target="_blank" rel="external">http://[your-server-IP]/500mb.zip</a> from a web browser on your desktop computer, and then evaluate download speed.</p>
+<h2 id="Step-3-optional-Test-the-network-performance-enhancement"><a href="#Step-3-optional-Test-the-network-performance-enhancement" class="headerlink" title="Step 3 (optional): Test the network performance enhancement"></a>Step 3 (optional): Test the network performance enhancement</h2><p>In order to test BBR’s network performance enhancement, you can create a file in the web server directory for download, and then test the download speed from a web browser on your desktop machine.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install httpd -y</span><br><span class="line">sudo systemctl start httpd.service</span><br><span class="line">sudo firewall-cmd --zone=public --permanent --add-service=http</span><br><span class="line">sudo firewall-cmd --reload</span><br><span class="line"><span class="built_in">cd</span> /var/www/html</span><br><span class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=500mb.zip bs=1024k count=500</span><br></pre></td></tr></table></figure>
+<p>Finally, visit the URL http://[your-server-IP]/500mb.zip from a web browser on your desktop computer, and then evaluate download speed.</p>
 
       
     </div>
@@ -655,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_1:_Upgrade_the_kernel_using_the_ELRepo_RPM_repository"><span class="nav-number">2.</span> <span class="nav-text">Step 1: Upgrade the kernel using the ELRepo RPM repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_2:_Enable_BBR"><span class="nav-number">3.</span> <span class="nav-text">Step 2: Enable BBR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_3_(optional):_Test_the_network_performance_enhancement"><span class="nav-number">4.</span> <span class="nav-text">Step 3 (optional): Test the network performance enhancement</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-Upgrade-the-kernel-using-the-ELRepo-RPM-repository"><span class="nav-number">2.</span> <span class="nav-text">Step 1: Upgrade the kernel using the ELRepo RPM repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-Enable-BBR"><span class="nav-number">3.</span> <span class="nav-text">Step 2: Enable BBR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-optional-Test-the-network-performance-enhancement"><span class="nav-number">4.</span> <span class="nav-text">Step 3 (optional): Test the network performance enhancement</span></a></li></ol></div>
             
 
           </div>
@@ -679,7 +680,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -689,7 +690,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -697,7 +698,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 

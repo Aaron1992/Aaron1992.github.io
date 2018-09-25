@@ -58,19 +58,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
 
 
 
@@ -85,7 +85,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    version: '',
+    version: '6.4.1',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
@@ -108,19 +108,17 @@
 
 
 
-  <meta name="description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。
-升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
+  <meta name="description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。 升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
 <meta property="og:type" content="article">
 <meta property="og:title" content="create git service with gog">
 <meta property="og:url" content="http://localhost/2018/02/02/create-git-service-with-gog/index.html">
 <meta property="og:site_name" content="NyanNyan">
-<meta property="og:description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。
-升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
+<meta property="og:description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。 升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-02-02T16:20:41.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create git service with gog">
-<meta name="twitter:description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。
-升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
+<meta name="twitter:description" content="使用Gog创建git服务今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。 升级mariadb到10.2遇到的第一个难题就是在安装gog时，遇到Error 1071: Specified key was too long; max key length is 767 bytes。经过查找资料，产生这种错">
 
 
 
@@ -195,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
+        <span class="site-title">NyanNyan</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -418,13 +416,13 @@
       
 
       
-        <h1 id="使用Gog创建git服务">使用Gog创建git服务</h1><p>今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。</p>
-<h2 id="升级mariadb到10-2">升级mariadb到10.2</h2><p>遇到的第一个难题就是在安装gog时，遇到<code>Error 1071: Specified key was too long; max key length is 767 bytes</code>。经过查找资料，产生这种错误的原因主要是因为</p>
+        <h1 id="使用Gog创建git服务"><a href="#使用Gog创建git服务" class="headerlink" title="使用Gog创建git服务"></a>使用Gog创建git服务</h1><p>今天发现gog挺好玩的，再加上自己的博客即将从wordpress转为hexo，所以希望有个git仓库保存自己的资源。借此机会，试一下gog的服务。</p>
+<h2 id="升级mariadb到10-2"><a href="#升级mariadb到10-2" class="headerlink" title="升级mariadb到10.2"></a>升级mariadb到10.2</h2><p>遇到的第一个难题就是在安装gog时，遇到<code>Error 1071: Specified key was too long; max key length is 767 bytes</code>。经过查找资料，产生这种错误的原因主要是因为</p>
 <blockquote>
 <p>Because of mysql 5.6 (includes prior versions) InnoDB max index length is 767 bytes, mysql 5.7.7 is up to 3072 bytes.<br>If some varchar column’s length is 255, when the character format is utf-8 needs 255<em>3=765 bytes for index length, It’s OK.<br>But, an utf8mb needs 255</em>4=1020 bytes for index length.<br>写这篇文章的时候gog暂时还没有修复这个bug,最简单的办法是升级mysql, 在centos上即mariadb.过程如下：</p>
 <p>Once you have your MariaDB.repo entry, add it to a file under /etc/yum.repos.d/. (We suggest something like /etc/yum.repos.d/MariaDB.repo.)</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name = MariaDB</span><br><span class="line">baseurl = http://yum.mariadb.org/<span class="number">10.2</span>/centos7-amd64</span><br><span class="line">gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name = MariaDB</span><br><span class="line">baseurl = http://yum.mariadb.org/10.2/centos7-amd64</span><br><span class="line">gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck=1</span><br></pre></td></tr></table></figure>
 <p>之后执行<code>yum update</code>以及<code>yum install mariadb-server</code>即可。</p>
 
       
@@ -453,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/12/fail2ban/" rel="next" title="使用fail2ban阻止暴力破解ssh">
-                <i class="fa fa-chevron-left"></i> 使用fail2ban阻止暴力破解ssh
+              <a href="/2018/01/28/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -667,7 +665,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
 
   
 
@@ -677,7 +675,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.1.1</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
@@ -685,7 +683,7 @@
 
 
 
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v</div>
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
 
 
 
