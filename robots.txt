@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Sitemap: http://zmyth.me/sitemap.xml
+Sitemap: http://zmyth.me/baidusitemap.xml
