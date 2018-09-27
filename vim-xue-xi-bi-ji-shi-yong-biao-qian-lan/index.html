@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="使用tab分页下边的的内容会介绍利用tab分页打开和编辑文件。在Vim中，所有文本都被放在缓存区，每一个缓存区都可以被显示在任意数量的窗口或任意数量的tab页面中（就像谷歌浏览器的标签页，以下将用tab描述）。 在很多编辑器中（不包括Vim）,一个文件只能在一个分页中打开，而每一个分页只能显示一个文件，一个文件不能出现在多个分页中。在Vim中并没有这个限制。Vim中的tabs可以很方便的组织你的工">
+<meta name="keywords" content="
+- vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 学习笔记-使用tab分页（1）">
+<meta property="og:url" content="https://zmyth.me/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/index.html">
+<meta property="og:site_name" content="NyanNyan">
+<meta property="og:description" content="使用tab分页下边的的内容会介绍利用tab分页打开和编辑文件。在Vim中，所有文本都被放在缓存区，每一个缓存区都可以被显示在任意数量的窗口或任意数量的tab页面中（就像谷歌浏览器的标签页，以下将用tab描述）。 在很多编辑器中（不包括Vim）,一个文件只能在一个分页中打开，而每一个分页只能显示一个文件，一个文件不能出现在多个分页中。在Vim中并没有这个限制。Vim中的tabs可以很方便的组织你的工">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2014-12-09T00:36:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim 学习笔记-使用tab分页（1）">
+<meta name="twitter:description" content="使用tab分页下边的的内容会介绍利用tab分页打开和编辑文件。在Vim中，所有文本都被放在缓存区，每一个缓存区都可以被显示在任意数量的窗口或任意数量的tab页面中（就像谷歌浏览器的标签页，以下将用tab描述）。 在很多编辑器中（不包括Vim）,一个文件只能在一个分页中打开，而每一个分页只能显示一个文件，一个文件不能出现在多个分页中。在Vim中并没有这个限制。Vim中的tabs可以很方便的组织你的工">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zmyth.me/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Vim 学习笔记-使用tab分页（1） | NyanNyan</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68028478-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68028478-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NyanNyan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-resource">
+    <a href="/resource/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />resource</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zmyth.me/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NyanNyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vim 学习笔记-使用tab分页（1）
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2014-12-09 07:29:30 / 修改时间：08:36:04" itemprop="dateCreated datePublished" datetime="2014-12-09T07:29:30+08:00">2014-12-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="使用tab分页"><a href="#使用tab分页" class="headerlink" title="使用tab分页"></a>使用tab分页</h3><p>下边的的内容会介绍利用tab分页打开和编辑文件。在Vim中，所有文本都被放在缓存区，每一个缓存区都可以被显示在任意数量的窗口或任意数量的tab页面中（就像谷歌浏览器的标签页，以下将用tab描述）。</p>
+<p>在很多编辑器中（不包括Vim）,一个文件只能在一个分页中打开，而每一个分页只能显示一个文件，一个文件不能出现在多个分页中。在Vim中并没有这个限制。Vim中的tabs可以很方便的组织你的工作。  </p>
+<p>(本文将省略Gvim的说明)</p>
+<hr>
+<h4 id="打开和关闭tabs"><a href="#打开和关闭tabs" class="headerlink" title="打开和关闭tabs"></a>打开和关闭tabs</h4><p>当打开Vim的时候，可以指定-p参数，使得每个文件在各自的tab中显示（直到设定的上限tabpagemax）。例如：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim -<span class="selector-tag">p</span> first<span class="selector-class">.txt</span> second.txt</span><br><span class="line">gvim -<span class="selector-tag">p</span> *.txt</span><br></pre></td></tr></table></figure></p>
+<p>当Vim被启动后，可以使用下边的命令创建和关闭文件<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:tabedit</span> &#123;file&#125;   <span class="comment">#在一个新的tab中编辑file文件</span></span><br><span class="line"><span class="symbol">:tabfind</span> &#123;file&#125;   <span class="comment">#在‘path'变量中搜索指定文件file,并在新的tab中打开</span></span><br><span class="line"><span class="symbol">:tabclose</span>         <span class="comment">#关闭当前的tab</span></span><br><span class="line"><span class="symbol">:tabclose</span> &#123;i&#125;     <span class="comment">#关闭第i个tab</span></span><br><span class="line"><span class="symbol">:tabonly</span>          <span class="comment">#关闭除当前tab外的所有tab</span></span><br></pre></td></tr></table></figure></p>
+<p>==:tabfind== 命令会使用Vim中的==’path’==选项最顶搜索的路径。例如下边的例子中。==.==会使Vim搜索当前文件所在的目录，然后搜索当前目录（两个连续的逗号==,,==），接着搜索当前目录的子目录(==**==)<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="builtin-name">set</span> <span class="attribute">path</span>=.,,**</span><br></pre></td></tr></table></figure></p>
+<p>记住，就像Vim中的很多命令一样，你只要输入足够多的字符使Vim分辨出来你的命令就可以了。例如，你可以用==:tabe==和==:tabf==来代替==:tabedit==和==:tabfind==</p>
+<p>另外，由于Vim中有大量的关于窗口的操作命令，在这些命令前加上tab就可以是这些命令变成对tab的操作。例如：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">tab</span> <span class="keyword">ball</span>         #show each <span class="keyword">buffer</span> in <span class="keyword">a</span> <span class="keyword">tab</span> (<span class="keyword">up</span> <span class="keyword">to</span> <span class="string">'tabpagemax'</span> <span class="keyword">tabs</span>) （我现在也不是很懂）</span><br><span class="line">:<span class="keyword">tab</span> <span class="keyword">help</span>         #在它自己的<span class="keyword">tab</span>页打开<span class="keyword">help</span>文件</span><br><span class="line">:<span class="keyword">tab</span> <span class="keyword">drop</span> &#123;<span class="keyword">file</span>&#125;  #为<span class="keyword">file</span>打开一个新的<span class="keyword">tab</span>, 如果已经存在，就跳转到它所在的窗口或<span class="keyword">tab</span></span><br><span class="line">:<span class="keyword">tab</span> <span class="keyword">split</span>        #将当前文件完全复制到另外一个新的<span class="keyword">tab</span>中</span><br></pre></td></tr></table></figure></p>
+<p>使用==:sp myfile.txt==类似的命令可以再当前的tab中打开一个新的窗口(即将当前页面分裂成两个窗口)。可以使用命令==Ctrl-w T==将那个窗口移动到一个新的tab, 也可以在不改变原来页面的情况下，使用==:tab sp==将那个窗口复制的另外一个页面。</p>
+<p>你可以使用==Ctrl-W c==关闭当前窗口，如果这个窗口已经是当前tab的最后一个窗口，这个tab也会被关闭。</p>
+<p>如果你现在编辑的文件中含有另外一个文件的名字，你可以将光标移动文江名上，然后按==gf==去编辑那个文件。使用==Ctrl-W gf==会让该文件显示在一个新的tab中。</p>
+<hr>
+<h4 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h4><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:tabs</span>         <span class="comment">#显示所有的tab，包括它们中的窗口</span></span><br><span class="line"><span class="symbol">:tabm</span> <span class="number">0</span>       <span class="comment">#将当前tab移动到第一个</span></span><br><span class="line"><span class="symbol">:tabm</span>         <span class="comment">#将当前tab移动到最后一个</span></span><br><span class="line"><span class="symbol">:tabm</span> &#123;i&#125;     <span class="comment">#将当前tab移动到第i+1个</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">:tabn</span>         <span class="comment">#切换到下个tab</span></span><br><span class="line"><span class="symbol">:tabp</span>         <span class="comment">#切换到上个tab</span></span><br><span class="line"><span class="symbol">:tabfirst</span>     <span class="comment">#切换到第一个tab</span></span><br><span class="line"><span class="symbol">:tablast</span>      <span class="comment">#切换到最后一个tab</span></span><br></pre></td></tr></table></figure>
+<p>在常规模式(命令视图)中，可以使用这些快捷键：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">gt</span>            <span class="comment">#切换到下个tab</span></span><br><span class="line"><span class="keyword">gT</span>            <span class="comment">#切换到上个tab</span></span><br><span class="line">&#123;i&#125;<span class="keyword">gt</span>         <span class="comment">#切换到第i个tab</span></span><br></pre></td></tr></table></figure></p>
+<p>记住gt命令是从1开始计数。0gt和1gt都会跳到第一个tab。</p>
+<hr>
+<h4 id="捷径"><a href="#捷径" class="headerlink" title="捷径"></a>捷径</h4><p>下边这些内容需要添加到vimrc文件中，可以得到一些关于tab操作的快捷键。（我省略了暂时没看）</p>
+<p>With the following mappings (which require gvim), you can press Ctrl-Left or Ctrl-Right to go to the previous or next tabs, and can press Alt-Left or Alt-Right to move the current tab to the left or right.<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;C-Left&gt;</span> :<span class="keyword">tabprevious</span><span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;C-Right&gt;</span> :<span class="keyword">tabnext</span><span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;A-Left&gt;</span> :<span class="keyword">execute</span> <span class="string">'silent! tabmove '</span> . (<span class="built_in">tabpagenr</span>()-<span class="number">2</span>)<span class="symbol">&lt;CR&gt;</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;silent&gt;</span> <span class="symbol">&lt;A-Right&gt;</span> :<span class="keyword">execute</span> <span class="string">'silent! tabmove '</span> . <span class="built_in">tabpagenr</span>()<span class="symbol">&lt;CR&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>With the following, you can press F8 to show all buffers in tabs, or to close all tabs (toggle: it alternately executes :tab ball and :tabo).<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let notabs = <span class="number">0</span></span><br><span class="line">nnoremap &lt;silent&gt; &lt;F8&gt; <span class="symbol">:let</span> notabs=!notabs&lt;Bar&gt;<span class="symbol">:if</span> notabs&lt;Bar&gt;<span class="symbol">:tabo&lt;Bar&gt;</span><span class="symbol">:else&lt;Bar&gt;</span><span class="symbol">:tab</span> ball&lt;Bar&gt;<span class="symbol">:tabn&lt;Bar&gt;</span><span class="symbol">:endif&lt;CR&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>The following command abbreviation allows typing :tabv myfile.txt to view the specified file in a new tab; the buffer is read-only and nomodifiable so you cannot accidentally change it.<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cabbrev</span> tabv <span class="keyword">tab</span> <span class="keyword">sview</span> +<span class="keyword">setlocal</span>\ nomodifiable</span><br></pre></td></tr></table></figure></p>
+<p>Refrence:<a href="http://vim.wikia.com/wiki/Using_tab_pages" target="_blank" rel="noopener">http://vim.wikia.com/wiki/Using_tab_pages</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># 
+- vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/vim-xue-xi-bi-ji-1/" rel="next" title="Vim 学习笔记-复制和粘贴">
+                <i class="fa fa-chevron-left"></i> Vim 学习笔记-复制和粘贴
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/vim-tutorial/" rel="prev" title="Vim tutorial">
+                Vim tutorial <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ring0.me/" title="BojieLi" target="_blank">BojieLi</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用tab分页"><span class="nav-number">1.</span> <span class="nav-text">使用tab分页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打开和关闭tabs"><span class="nav-number">1.1.</span> <span class="nav-text">打开和关闭tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导航"><span class="nav-number">1.2.</span> <span class="nav-text">导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#捷径"><span class="nav-number">1.3.</span> <span class="nav-text">捷径</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://zmyth.me/vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/';
+        this.page.identifier = 'vim-xue-xi-bi-ji-shi-yong-biao-qian-lan/';
+        this.page.title = 'Vim 学习笔记-使用tab分页（1）';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://short-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

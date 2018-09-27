@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
+<meta name="keywords" content="hashcat,破解密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hashcat破解office(97-03,2007,2010,2013)密码">
+<meta property="og:url" content="https://zmyth.me/hashcat破解office密码/index.html">
+<meta property="og:site_name" content="NyanNyan">
+<meta property="og:description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-09-13T16:56:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hashcat破解office(97-03,2007,2010,2013)密码">
+<meta name="twitter:description" content="hashcat 是什么hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zmyth.me/hashcat破解office密码/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>hashcat破解office(97-03,2007,2010,2013)密码 | NyanNyan</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68028478-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68028478-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NyanNyan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-resource">
+    <a href="/resource/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />resource</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zmyth.me/hashcat破解office密码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NyanNyan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">hashcat破解office(97-03,2007,2010,2013)密码
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-09-13 23:28:21" itemprop="dateCreated datePublished" datetime="2015-09-13T23:28:21+08:00">2015-09-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2015-09-14 00:56:45" itemprop="dateModified" datetime="2015-09-14T00:56:45+08:00">2015-09-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hashcat/" itemprop="url" rel="index"><span itemprop="name">hashcat</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hashcat破解office密码/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="hashcat破解office密码/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="hashcat-是什么"><a href="#hashcat-是什么" class="headerlink" title="hashcat 是什么"></a>hashcat 是什么</h3><p>hashcat是一款免费的密码破解工具。它支持使用AMD和NVidia显卡运算，同时也保留使用cpu计算的版本。hashcat号称是世界上最快的密码破解工具，同时也是世界上第一款和唯一一款使用通用图形处理器的工具。它支持windows和linux操作系统，同时支持OpenCL和CUDA。hashcat可以支持破解包括MD5,sha1等150多种加密算法生成的密码。具体特性和支持的加密算法见<a href="http://hashcat.net/oclhashcat/。" target="_blank" rel="noopener">http://hashcat.net/oclhashcat/。</a></p>
+<p>使用hashcat破解office密码的时候需要指定加密方式，Office 03 - 2013一共有9种hash方式，分别如下</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(MD5+RC4,oldoffice$<span class="number">0</span>,oldoffice$<span class="number">1</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9700</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(MD5+RC4,collider-mode<span class="number">#1</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9710</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(MD5+RC4,collider-mode<span class="number">#2</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9720</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(SHA1+RC4,oldoffice$<span class="number">3</span>,oldoffice$<span class="number">4</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9800</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(SHA1+RC4,collider-mode<span class="number">#1</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9810</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">97-03</span>(SHA1+RC4,collider-mode<span class="number">#2</span>): <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9820</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">2007</span>: <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9400</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">2010</span>: <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9500</span></span><br><span class="line"><span class="selector-tag">Office</span> <span class="selector-tag">2013</span>: <span class="selector-tag">flag</span> <span class="selector-tag">-m</span> <span class="selector-tag">9600</span></span><br></pre></td></tr></table></figure>
+<p>本文将介绍如何使用hashcat破解office密码。现在我有一个密码加密的xls文件test.xls，我将在windows平台使用hashcat破解它的密码。</p>
+<h3 id="获取文件hash值"><a href="#获取文件hash值" class="headerlink" title="获取文件hash值"></a>获取文件hash值</h3><p>首先，我们需要获取文件的hash值，使用<a href="https://github.com/kholia/RC4-40-brute-office/blob/master/office2john.py" target="_blank" rel="noopener">office2john.py</a>可以提取文件的hash值。<br>运行这个脚本首先需要安装python2.7环境。</p>
+<p>在命令行中执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python office2john.py test.xls</span></span><br></pre></td></tr></table></figure>
+<p>我们这里的例子得到的hash结果为：</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test.xls:$oldoffice$<span class="number">0</span>*<span class="number">2031</span>e09b28a2a13a891dff99bae0927d*<span class="number">65264</span>ab10fdde25b221</span><br><span class="line"><span class="number">46</span>e<span class="number">2c94778c50</span>*<span class="number">981</span>ec9419aa5dd88c0340491ed07f38c:<span class="number">::936</span> <span class="number">111 730895</span> <span class="number">936 111</span></span><br><span class="line"><span class="number">12798626794</span> <span class="number">12798538993</span> <span class="number">12932656957</span> Microsoft Excel <span class="number">1::</span>test.xls</span><br></pre></td></tr></table></figure>
+<p>第一个<code>:</code>号前边是文件名，紧跟着的是加密方式，这里是<code>oldoffice$0</code>。然后在hashcat官网的<br><a href="http://hashcat.net/wiki/doku.php?id=oclhashcat#options" target="_blank" rel="noopener">wiki</a>页面的options中<br> Generic hash types 找到对应的代号，这里<code>oldoffice$0</code>的代号是9700。我们用hashcat只需要第一个冒号和第二个冒号之间的内容。<br> 这里是</p>
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$oldoffice</span><span class="variable">$0</span><span class="number">*2031e09b28a2a13a891dff99bae0927d</span><span class="number">*65264ab10fdde25b22146e2c94778c50</span><span class="number">*981ec9419aa5dd88c0340491ed07f38c</span></span><br></pre></td></tr></table></figure>
+<p>将得到的hash值保存到文本文件中，这里保存到hash.txt里。</p>
+<h3 id="使用hashcat破解"><a href="#使用hashcat破解" class="headerlink" title="使用hashcat破解"></a>使用hashcat破解</h3><p>hashcat可以使用字典或者掩码对密码进行攻击。一开始我使用掩码，但是使用较短位数密码时它不断警告字典空间过小，无法发挥GPU的并行运算能力。所以我这里使用了字典。<br>因为这个文件是我同学交给我让我帮忙找回密码的，我猜测密码可能是纯数字的，并且有可能在8位以下。我首先生成了一个4到8位数字密码的字典。</p>
+<p>在hashacat目录下打开命令行，输入下面的命令开始破解。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cudaHashcat64<span class="selector-class">.exe</span> -<span class="selector-tag">a</span> <span class="number">0</span> -m <span class="number">9700</span> -o found<span class="selector-class">.txt</span> hash<span class="selector-class">.txt</span> F:\wordlist\wordlist</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>cudaHashcat64.exe 是在英伟达显卡电脑上要运行的版本。</li>
+<li>-a 参数指定攻击方式,这里的 0 表示使用字典攻击。</li>
+<li>-m 参数指定密码加密方式，这里使用我们查到的9700，代表我们的excel2003加密。</li>
+<li>-o 指定结果输出的位置，这里指定输出到found.txt。接下来hash.txt是保存hash值的文件名，<code>F:\wordlist\wordlist</code>是字典的位置和文件名。</li>
+</ul>
+<p>程序开始运行后按s可以查看破解状态,按p暂停，按r继续，按q退出。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[s]tatus [p]ause [r]esume [b]ypass [q]uit =&gt;</span><br><span class="line"></span><br><span class="line">Session.Name<span class="built_in">..</span>.: cudaHashcat</span><br><span class="line">Status<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: Running</span><br><span class="line">Input.Mode<span class="built_in">..</span><span class="built_in">..</span>.: File (F:\wordlist\wordlist)</span><br><span class="line">Hash.Target<span class="built_in">..</span><span class="built_in">..</span>: <span class="variable">$oldoffice</span><span class="variable">$0</span><span class="number">*2031e09b28a2a13a891dff99bae0</span><span class="built_in">..</span>.</span><br><span class="line">Hash.Type<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>: MS Office &lt;= 2003 MD5 + RC4, oldoffice<span class="variable">$0</span>, oldoffice<span class="variable">$1</span></span><br><span class="line">Time.Started<span class="built_in">..</span>.: Mon Sep 14 00:18:38 2015 (1 sec)</span><br><span class="line">Time.Estimated.: Mon Sep 14 00:20:50 2015 (2 mins, 10 secs)</span><br><span class="line">Speed.GPU.#1<span class="built_in">..</span>.:   910.1 kH/s</span><br><span class="line">Recovered<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts</span><br><span class="line">Progress<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: 1401856/111110000 (1.26%)</span><br><span class="line">Rejected<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: 0/1401856 (0.00%)</span><br><span class="line">Restore.Point<span class="built_in">..</span>: 1401856/111110000 (1.26%)</span><br><span class="line">HWMon.GPU.#1<span class="built_in">..</span>.: 65% Util, 54c Temp, N/A Fan</span><br></pre></td></tr></table></figure>
+<p>在经过35秒的计算后，文件的密码被算出。屏幕上输出状态，程序结束运行。结果将输出到found.txt中。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Session.Name<span class="built_in">..</span>.: cudaHashcat</span><br><span class="line">Status<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: Cracked</span><br><span class="line">Input.Mode<span class="built_in">..</span><span class="built_in">..</span>.: File (F:\wordlist\wordlist)</span><br><span class="line">Hash.Target<span class="built_in">..</span><span class="built_in">..</span>: <span class="variable">$oldoffice</span><span class="variable">$0</span><span class="number">*2031e09b28a2a13a891dff99bae0</span><span class="built_in">..</span>.</span><br><span class="line">Hash.Type<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>: MS Office &lt;= 2003 MD5 + RC4, oldoffice<span class="variable">$0</span>, oldoffice<span class="variable">$1</span></span><br><span class="line">Time.Started<span class="built_in">..</span>.: Mon Sep 14 00:18:38 2015 (35 secs)</span><br><span class="line">Speed.GPU.#1<span class="built_in">..</span>.:   887.4 kH/s</span><br><span class="line">Recovered<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts</span><br><span class="line">Progress<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: 30941184/111110000 (27.85%)</span><br><span class="line">Rejected<span class="built_in">..</span><span class="built_in">..</span><span class="built_in">..</span>.: 0/30941184 (0.00%)</span><br><span class="line">Restore.Point<span class="built_in">..</span>: 30940160/111110000 (27.85%)</span><br><span class="line">HWMon.GPU.#1<span class="built_in">..</span>.: 27% Util, 58c Temp, N/A Fan</span><br></pre></td></tr></table></figure>
+<p>打开found.txt，其中内容如下。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$oldoffice</span><span class="variable">$0</span><span class="number">*2031e09b28a2a13a891dff99bae0927d</span><span class="number">*65264ab10fdde25b22146e2c94778c50</span><span class="number">*981ec9419aa5dd88c0340491ed07f38c</span>:19830312</span><br></pre></td></tr></table></figure></p>
+<p>冒号后边就是破解的密码19830312。至此，这个密码加密的excel的密码就被破解了。</p>
+<p>这里使用的excel文件是office2003版本，相对与office2007以后的版本加密算法要弱。所以hashcat运算速度也相对较快。我在使用word2013文件进行测试的时候，hashcat破解速度极慢。<br>而且这个文件的密码是8位纯数字，字典空间较小，所以才能很快的破解出来。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hashcat/" rel="tag"># hashcat</a>
+          
+            <a href="/tags/破解密码/" rel="tag"># 破解密码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/meteorshi-yong-xian-you-de-mongodbshu-ju-ku/" rel="next" title="Meteor使用现有的mongodb数据库">
+                <i class="fa fa-chevron-left"></i> Meteor使用现有的mongodb数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/破解py2exe打包的程序/" rel="prev" title="破解py2exe打包的程序">
+                破解py2exe打包的程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ring0.me/" title="BojieLi" target="_blank">BojieLi</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hashcat-是什么"><span class="nav-number">1.</span> <span class="nav-text">hashcat 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取文件hash值"><span class="nav-number">2.</span> <span class="nav-text">获取文件hash值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用hashcat破解"><span class="nav-number">3.</span> <span class="nav-text">使用hashcat破解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://zmyth.me/hashcat破解office密码/';
+        this.page.identifier = 'hashcat破解office密码/';
+        this.page.title = 'hashcat破解office(97-03,2007,2010,2013)密码';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://short-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
