@@ -329,6 +329,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zmyth.me/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="A blog for interest.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="二哈博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="url">
+                  使用Las Vegas随机算法求N皇后问题的解
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2014-11-28 22:23:07 / 修改时间：23:04:52" itemprop="dateCreated datePublished" datetime="2014-11-28T22:23:07+08:00">2014-11-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          #include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;time.h&gt;
+
+#define bool int
+#define true 1
+#define false 0
+
+#define DIM 50 
+
+int uniform(int n){   //random function
+    double r;
+    if(n&lt;=0)
+    return -1;
+    r=rand();
+    return (int)(r/RAND_MAX*(n-1))+1;
+}
+
+bool QueensLv(int try[]){   //LV算法解决N皇后问题
+    int index,nb;
+    int col,randcol;
+    bool conflict=false;
+    int row=0;
+    bool success=false;
+
+    do {   //从第一行开始
+        nb=0;    ////计数器，nb值为（row)th皇后的open位置总数
+       
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/shi-yong-las-vegassui-ji-suan-fa-qiu-nhuang-hou-wen-ti-de-jie/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zmyth.me/dian-xin-fu-wu-shang-ping-bi-digitaloceanxin-jia-po-ip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -524,7 +709,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

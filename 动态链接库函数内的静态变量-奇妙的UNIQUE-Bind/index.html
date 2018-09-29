@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="介绍模板函数和内敛函数中的静态变量，在跨so中的表现，和定义在其他函数中的静态变量的表现稍微有所不同。使用不慎，会造成预期之外的结果。本文对该现象进行了探讨。 多共享动态库的静态变量问题最近遇到一个使用多个共享动态库时，由于静态变量导致的逻辑问题。考虑如下一个问题，主模块要打开A.so和B.so两个动态库，两个动态库的代码使用到了同一个模板函数，而该模板函数有一个静态变量。那么，当两个动态库都加载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态链接库函数内的静态变量,奇妙的UNIQUE Bind">
+<meta property="og:url" content="https://zmyth.me/动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/index.html">
+<meta property="og:site_name" content="二哈博客">
+<meta property="og:description" content="介绍模板函数和内敛函数中的静态变量，在跨so中的表现，和定义在其他函数中的静态变量的表现稍微有所不同。使用不慎，会造成预期之外的结果。本文对该现象进行了探讨。 多共享动态库的静态变量问题最近遇到一个使用多个共享动态库时，由于静态变量导致的逻辑问题。考虑如下一个问题，主模块要打开A.so和B.so两个动态库，两个动态库的代码使用到了同一个模板函数，而该模板函数有一个静态变量。那么，当两个动态库都加载">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-29T14:43:41.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态链接库函数内的静态变量,奇妙的UNIQUE Bind">
+<meta name="twitter:description" content="介绍模板函数和内敛函数中的静态变量，在跨so中的表现，和定义在其他函数中的静态变量的表现稍微有所不同。使用不慎，会造成预期之外的结果。本文对该现象进行了探讨。 多共享动态库的静态变量问题最近遇到一个使用多个共享动态库时，由于静态变量导致的逻辑问题。考虑如下一个问题，主模块要打开A.so和B.so两个动态库，两个动态库的代码使用到了同一个模板函数，而该模板函数有一个静态变量。那么，当两个动态库都加载">
+
+
+
+
+
+
+  <link rel="canonical" href="https://zmyth.me/动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>动态链接库函数内的静态变量,奇妙的UNIQUE Bind | 二哈博客</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-68028478-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-68028478-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">二哈博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-resource">
+    <a href="/resource/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />resource</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zmyth.me/动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="A blog for interest.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="二哈博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">动态链接库函数内的静态变量,奇妙的UNIQUE Bind
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-28 09:28:22" itemprop="dateCreated datePublished" datetime="2018-09-28T09:28:22+08:00">2018-09-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-29 22:43:41" itemprop="dateModified" datetime="2018-09-29T22:43:41+08:00">2018-09-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>模板函数和内敛函数中的静态变量，在跨so中的表现，和定义在其他函数中的静态变量的表现稍微有所不同。使用不慎，会造成预期之外的结果。本文对该现象进行了探讨。</p>
+<h1 id="多共享动态库的静态变量问题"><a href="#多共享动态库的静态变量问题" class="headerlink" title="多共享动态库的静态变量问题"></a>多共享动态库的静态变量问题</h1><p>最近遇到一个使用多个共享动态库时，由于静态变量导致的逻辑问题。考虑如下一个问题，主模块要打开A.so和B.so两个动态库，两个动态库的代码使用到了同一个模板函数，而该模板函数有一个静态变量。那么，当两个动态库都加载到内存时，这两个函数间会产生联系吗？</p>
+<p>头文件和so的示例代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//so_test.h</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">print_msg</span><span class="params">(T)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    num++;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"msg form , num = %d, \n"</span>, num );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-----------------------\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXPORT_DYN_SYM __attribute__ ((visibility (<span class="meta-string">"default"</span>)))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="function">EXPORT_DYN_SYM  <span class="keyword">void</span> <span class="title">test_a</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">EXPORT_DYN_SYM <span class="keyword">void</span> <span class="title">test_b</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">EXPORT_DYN_SYM <span class="keyword">void</span> <span class="title">test_c</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//A.so</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"so_test.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_a</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"this is in test_a...\n"</span>);</span><br><span class="line">    print_msg();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//B.so</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"so_test.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_b</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"this is in test_b...\n"</span>);</span><br><span class="line">    print_msg();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>加载模块的代码如下,动态加载两个so，并调用两个函数，RTLD_LOCAL属性表示调用函数时应该尽量在本地so寻找符号。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"so_test.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dlfcn.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIB_A_PATH <span class="meta-string">"./liba.so"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LIB_B_PATH <span class="meta-string">"./libb.so"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*DYN_FUNC)</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//test_a();</span></span><br><span class="line">    <span class="comment">//test_b();</span></span><br><span class="line">    <span class="keyword">void</span> *handle,* handle2;</span><br><span class="line">    <span class="keyword">char</span> *error;</span><br><span class="line">    DYN_FUNC func_a = <span class="literal">NULL</span>;</span><br><span class="line">    DYN_FUNC func_b = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打开动态链接库</span></span><br><span class="line">    handle = dlopen(LIB_A_PATH, RTLD_LAZY |RTLD_LOCAL); <span class="comment">//错误处理过程已省略</span></span><br><span class="line">    handle2 = dlopen(LIB_B_PATH, RTLD_LAZY | RTLD_LOCAL);<span class="comment">//错误处理过程已省略</span></span><br><span class="line"></span><br><span class="line">    func_a = (DYN_FUNC)dlsym(handle, <span class="string">"test_a"</span> );<span class="comment">//错误处理过程已省略</span></span><br><span class="line">    func_b = (DYN_FUNC)dlsym(handle2, <span class="string">"test_b"</span>);<span class="comment">//错误处理过程已省略</span></span><br><span class="line"></span><br><span class="line">    func_b();</span><br><span class="line">    func_a();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用如下的命令编译该代码：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g++ -fPIC -shared -g  -o liba<span class="selector-class">.so</span> so_a.c</span><br><span class="line">g++ -fPIC -shared -g  -o libb<span class="selector-class">.so</span> so_b.c</span><br><span class="line">g++ -o test test<span class="selector-class">.c</span> -g  -ldl</span><br></pre></td></tr></table></figure></p>
+<p>程序执行后结果如下：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">this is in test<span class="emphasis">_b...</span></span><br><span class="line"><span class="emphasis">msg , num = 1,</span></span><br><span class="line"><span class="emphasis">-----------------------</span></span><br><span class="line"><span class="emphasis">this is in test_</span>a...</span><br><span class="line">msg , num = 2,</span><br><span class="line">-----------------------</span><br></pre></td></tr></table></figure></p>
+<p>从程序执行结果看，这两个so中的同名函数产生了联系，这种联系是怎么产生的呢？是因为调用了同一个print_msg函数，还是因为使用了相同的静态变量呢？</p>
+<h1 id="模板函数中的静态变量分析"><a href="#模板函数中的静态变量分析" class="headerlink" title="模板函数中的静态变量分析"></a>模板函数中的静态变量分析</h1><p>在第一节中，发现不同so中实例化的同名模板函数之间产生了联系。<br>在往下分析之前，首先要了解两个事实:</p>
+<ol>
+<li>这个模板函数在a.so和b.so分别实例化了一份代码，可以通过<code>readelf -sW liba.so</code>看到两个的函数各自的符号。</li>
+<li>如果不适用模板，而是将<code>print_msg</code>分别在a.c和b.c中各定义一份，此时编译生成so之后，执行结果的两个函数间是没有联系的，也就是打印结果是两个<code>num=1</code>。该测试这里不再详细描述。</li>
+</ol>
+<p>那么为什么两个不同的函数中的num++会互相影响呢？</p>
+<ol>
+<li>是因为plt调用了同一个print_msg函数吗？</li>
+<li>还是因为两个print_msg函数使用了同一个静态变量。</li>
+</ol>
+<p>首先看问题1， 是不是因为plt调用了同一个print_msg函数。可以在gdb中下断点观察函数的地址，也可以在代码中添加print打印函数的地址。<br>在代码中打印print_msg函数的代码如下，将这两行代码分别添加到test_a和test_b函数中。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void (<span class="name">*p</span>)(<span class="name">int</span>) = print_msg&lt;int&gt;<span class="comment">;</span></span><br><span class="line">printf(<span class="string">"print_msg is %p\n"</span>, p)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>同时，在so_test.h的print_msg函数中打印静态变量的地址。<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"msg ,num addess %p, num = %d, \n"</span>, &amp;<span class="built_in">num</span>, <span class="built_in">num</span> );</span><br></pre></td></tr></table></figure></p>
+<p>更改之后，编译，执行，结果如下<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print<span class="emphasis">_msg is 0x7f42a8d94902</span></span><br><span class="line"><span class="emphasis">this is in test_</span>b...</span><br><span class="line">msg ,num addess 0x7f42a919704c, num = 1,</span><br><span class="line">-----------------------</span><br><span class="line">print<span class="emphasis">_msg is 0x7f42a8f96812</span></span><br><span class="line"><span class="emphasis">this is in test_</span>a...</span><br><span class="line">msg ,num addess 0x7f42a919704c, num = 2,</span><br><span class="line">-----------------------</span><br></pre></td></tr></table></figure></p>
+<p>从结果看，a.so和b.so之间的调用的print_msg是不同的地址，这两个print_msg是不同的函数，但是静态变量num的地址是相同的。这是不寻常的。</p>
+<blockquote>
+<p>不熟悉的人可能会认为同名函数的静态变量本来应该是一个。实际上，如果没有使用模板函数的模板化，而是各自定义相同代码的print_msg，甚至加载相同的so，两个so间同名函数使用的同名静态变量，也是不同的。可以将上文的print_msg从模板函数改为本地函数得到验证.</p>
+</blockquote>
+<blockquote>
+<p>在上文中的main函数里，使用了dlopen和dlsym来动态加载函数，而没有在编译是用<code>-L./ -la -lb</code>选项链接a.so和b.so，并直接调用test_a和test_b，是因为如果在编译时就指定了链接的话，print_msg将从plt表中获取，此时test_a和test_b将调用的是同一个print_msg函数。</p>
+</blockquote>
+<p>首先，我们知道对于加了选项 -fpic或 -fPIC的共享库，全局变量的地址都存放在该共享库的全局偏移表（Global Offset Table，GOT）中，那么这个静态变量是不是这样呢，使用objdump或者 readelf命令分析共享库a.so结果如下。_ZZ9print_msgIiEvT_E3num就是我们模板函数中的静态变变量(c++ name mangling后的符号名)，现在在GOT表中。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$objdump -x -R libb.so | grep num</span><br><span class="line"><span class="number">0000000000201060</span> l     O .bss   <span class="number">0000000000000004</span>              _ZZ11local_printvE3num</span><br><span class="line"><span class="number">0000000000201068</span> u     O .bss   <span class="number">0000000000000004</span>              _ZZ9print_msgIiEvT_E3num</span><br><span class="line"><span class="number">0000000000200</span>fd8 R_X86_64_GLOB_DAT  _ZZ9print_msgIiEvT_E3num@@Base</span><br></pre></td></tr></table></figure></p>
+<p>这就解释我们的问题了吗？不，虽然_ZZ9print_msgIiEvT_E3num在GOT表中，但是这并不能解释为什么模板函数和普通函数的静态变量表现不同。即使我们在两个so中定义了同名的全局变量，全局变量也一样出现在GOT表中，但是这两个全局变量仍然会指向两个不同的地址。不同的so间同名全局变量不会相互干扰。</p>
+<p>接下来，使用readelf工具查看这个静态变量到底有什么不同之处。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$readelf</span> -sW liba.so</span><br><span class="line">   Num:    Value          Size<span class="built_in"> Type </span>   Bind   Vis      Ndx Name</span><br><span class="line">   <span class="built_in">..</span><span class="built_in">..</span></span><br><span class="line">   10: 0000000000201054     4 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  23 _ZZ9print_msgIiEvT_E3num</span><br><span class="line">   60: 0000000000201054     4 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  23 _ZZ9print_msgIiEvT_E3num</span><br></pre></td></tr></table></figure></p>
+<p>从结果看，_ZZ9print_msgIiEvT_E3num就是我们要找的静态变量。这两行的结果分别是’.dynsym’节区和’.symtab’节区的内容。如果对ELF文件的格式熟悉的话，会注意到，常见的函数Bind Type一般是LOCAL、GLOBAL或者WEAK。<em>就算是全局变量，Bind类型也是GLOBAL</em>。这里出现了UNIQUE，<code>UNIQUE</code>是什么,它又表示什么意思？</p>
+<h1 id="STB-GNU-UNIQUE的Bind属性"><a href="#STB-GNU-UNIQUE的Bind属性" class="headerlink" title="STB_GNU_UNIQUE的Bind属性"></a>STB_GNU_UNIQUE的Bind属性</h1><p>上一节中最后提到的UNIQUE属性全名是<code>STB_GNU_UNIQUE</code>。该属性表示了符号在动态链接过程中的一种类型，它的工作模式并不是很直观。这里找到了一份dllookup的<a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=elf/dl-lookup.c;h=a2a699b48f5f188da2528ed163b7befffed586ee;hb=HEAD#l445" target="_blank" rel="noopener">代码</a>。在处理<code>STB_GNU_UNIQUE</code>时的注释如下：<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">307 </span>            case STB_GNU_UNIQUE:;</span><br><span class="line"><span class="symbol">308 </span>              /* We have <span class="keyword">to</span> determine whether we already found a</span><br><span class="line"><span class="symbol">309 </span>                 symbol with this <span class="keyword">name</span> before.  <span class="keyword">If</span> <span class="keyword">not</span> <span class="keyword">then</span> we have <span class="keyword">to</span></span><br><span class="line"><span class="symbol">310 </span>                 add it <span class="keyword">to</span> the search table.  <span class="keyword">If</span> we already found a</span><br><span class="line"><span class="symbol">311 </span>                 definition we have <span class="keyword">to</span> use it.  */</span><br></pre></td></tr></table></figure></p>
+<p>大致意思是说，在处理该属性的符号时，会先查找搜索表内容，如果搜索表中已经存在该符号，则使用已经存在的符号，否则将其加入搜索表。</p>
+<p>到这里，已经大致能够猜到，<code>STB_GNU_UNIQUE</code>属性的符号，在链接时只会有一份，即使这些符号分布在不同的so之间。就算由于模板函数中的静态变量是<code>STB_GNU_UNIQUE</code>属性，导致改模板函数即使在不同的so中各实例化了一份代码，也要使用同一个静态变量。</p>
+<p>而且，通过在谷歌搜索<code>STB_GNU_UNIQUE</code>，发现<code>STB_GNU_UNIQUE</code>还有导致一个其他的更为常见的问题：无法使用dlclose卸载含有<code>STB_GNU_UNIQUE</code>变量的动态库。</p>
+<p>在StackOverFlow有这么一个问题<a href="https://stackoverflow.com/questions/11050693/dlclose-doesnt-work-with-factory-function-complex-static-in-function" target="_blank" rel="noopener">dlclose() doesn’t work with factory function &amp; complex static in function?</a>。其中一个回答的内容是</p>
+<blockquote>
+<p>What’s happening is that there is a STB_GNU_UNIQUE symbol in libempty.so:</p>
+<p>readelf -Ws libempty.so | grep _ZGVZN3Foo4initEvE2ns<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">91: 0000000000203e80     8 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  25 _ZGVZN3Foo4initEvE2ns</span><br><span class="line">77: 0000000000203e80     8 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  25 _ZGVZN3Foo4initEvE2ns</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>The problem is that STB_GNU_UNIQUE symbols work quite un-intuitively, and persist across dlopen/dlclose calls.</p>
+<p>The use of that symbol forces glibc to mark your library as non-unloadable here.</p>
+<p>There are other surprises with GNU_UNIQUE symbols as well. If you use sufficiently recent gold linker, you can disable the GNU_UNIQUE with –no-gnu-unique flag.</p>
+</blockquote>
+<p>可以知道，<code>STB_GNU_UNIQUE</code>将会强制标记动态库为不可使用dlcose卸载。如果不希望生成该类型的符号，则需要在编译时使用<code>--no-gnu-unique</code>选项。</p>
+<h1 id="inline函数的静态符号"><a href="#inline函数的静态符号" class="headerlink" title="inline函数的静态符号"></a>inline函数的静态符号</h1><p>除了第一个节使用的模板函数外，在inline函数中使用静态符号，也会生成UNIQUE类型的变量符号。<br>使用如下的代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">goo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">static</span> <span class="keyword">int</span> xyz;</span><br><span class="line">     <span class="keyword">return</span> xyz++;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_b</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     print_msg&lt;<span class="keyword">int</span>&gt;(<span class="number">1</span>);</span><br><span class="line">     goo();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>g++ -fPIC -shared -g  -o liba.so so_a.c</code>编译生成so文件后，使用readelf查看xyz变量的属性。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$readelf</span> -sW libb.so | grep xyz</span><br><span class="line">    13: 0000000000201064     4 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  23 _ZZ3goovE3xyz</span><br><span class="line">    67: 0000000000201064     4 OBJECT  UNIQUE<span class="built_in"> DEFAULT </span>  23 _ZZ3goovE3xyz</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，xyz对应的符号_ZZ3goovE3xyz属性也是UNIQUE。根据上一节的分析，不同so之间使用该inline函数，也会使用同一个静态变量符号。而且，使用了这个inline函数后，也会导致编译生成的动态库不可卸载。</p>
+<h1 id="避开UNIQUE"><a href="#避开UNIQUE" class="headerlink" title="避开UNIQUE"></a>避开UNIQUE</h1><p>有的时候，我们不希望不同so之间的同名函数互相影响，或者希望能够动态加载和卸载动态库，但又不得不让该变量继续是static。除了上文中提到过的<code>--no-gnu-unique</code>编译选项，还有什么办法可以避开<code>STB_GNU_UNIQUE</code>属性呢？</p>
+<p>有一个方法是使用static。不是说static变量导致了该属性吗？怎么还要使用static。这一次的static使用在函数前，而不是变量前。例如上一节的内敛函数，可以使用static声明。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">goo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">static</span> <span class="keyword">int</span> xyz;</span><br><span class="line">     <span class="keyword">return</span> xyz++;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>之后再次使用该函数时，生成的符号属性则如下所示。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$readelf</span> -sW libb.so | grep xyz</span><br><span class="line">   45: 0000000000201058     4 OBJECT  LOCAL <span class="built_in"> DEFAULT </span>  23 _ZZL3goovE3xyz</span><br></pre></td></tr></table></figure></p>
+<p>处理发现变量的Bind从UNIQUE编程了LOCAL以外，还会发现，前边readelf都会发现该变量有两行结果，一个在’.dynsym’节区，一个在’.symtab’节区。而这次只剩下了一行结果。这是因为’.dynsym’节区没有这个符号了，只剩下了’.symtab’节区的符号。</p>
+<p>此外，在编译选项中使用<code>--visibility=hidden</code>,也会将该符号变为LOCAL。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-sdlstatic/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-cn-sdlstatic/index.html</a></li>
+<li><a href="https://stackoverflow.com/questions/11050693/dlclose-doesnt-work-with-factory-function-complex-static-in-function" target="_blank" rel="noopener">https://stackoverflow.com/questions/11050693/dlclose-doesnt-work-with-factory-function-complex-static-in-function</a></li>
+<li><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=elf/dl-lookup.c;h=a2a699b48f5f188da2528ed163b7befffed586ee;hb=HEAD#l445" target="_blank" rel="noopener">https://sourceware.org/git/?p=glibc.git;a=blob;f=elf/dl-lookup.c;h=a2a699b48f5f188da2528ed163b7befffed586ee;hb=HEAD#l445</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/core-dump文件分析和调试/" rel="next" title="core dump文件分析和调试">
+                <i class="fa fa-chevron-left"></i> core dump文件分析和调试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Aaron</p>
+              <p class="site-description motion-element" itemprop="description">A blog for interest.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ring0.me/" title="BojieLi" target="_blank">BojieLi</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多共享动态库的静态变量问题"><span class="nav-number">2.</span> <span class="nav-text">多共享动态库的静态变量问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板函数中的静态变量分析"><span class="nav-number">3.</span> <span class="nav-text">模板函数中的静态变量分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STB-GNU-UNIQUE的Bind属性"><span class="nav-number">4.</span> <span class="nav-text">STB_GNU_UNIQUE的Bind属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#inline函数的静态符号"><span class="nav-number">5.</span> <span class="nav-text">inline函数的静态符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#避开UNIQUE"><span class="nav-number">6.</span> <span class="nav-text">避开UNIQUE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aaron</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" rel="external nofollow" href="https://theme-next.org">NexT.Pisces</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://short-blog.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://zmyth.me/动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/';
+        this.page.identifier = '动态链接库函数内的静态变量-奇妙的UNIQUE-Bind/';
+        this.page.title = '动态链接库函数内的静态变量,奇妙的UNIQUE Bind';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://short-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
